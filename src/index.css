@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
+
+/* Brand typography: Space Grotesk (display/UI) + Space Mono (data). These
+   feed Tailwind's font-sans / font-mono utilities used throughout the app. */
+@theme {
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
 
 /*
  * Accessibility: honour the OS "reduce motion" preference. This calms the

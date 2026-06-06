@@ -22,6 +22,7 @@ import {
   Gauge,
   Stamp
 } from 'lucide-react';
+import BrandMark from './components/BrandMark';
 import ImageSandbox from './components/ImageSandbox';
 import TextBypassSandbox from './components/TextBypassSandbox';
 import ComfyUIWorkflow from './components/ComfyUIWorkflow';
@@ -76,9 +77,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
 
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-cyan-500/20">
-              <ShieldCheck className="w-5 h-5 text-white" />
-            </div>
+            <BrandMark className="w-9 h-9 text-white/90 shrink-0" />
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-sm sm:text-base font-bold tracking-tight text-white/90">
@@ -347,7 +346,7 @@ export default function App() {
             {/* Identity + byline */}
             <div className="flex flex-col gap-1.5 max-w-md">
               <div className="flex items-center gap-2 text-white/80 text-xs font-bold">
-                <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                <BrandMark className="w-5 h-5 text-white/70" />
                 Watermark Stress Test
               </div>
               <p className="text-[11px] text-white/45 leading-relaxed">
