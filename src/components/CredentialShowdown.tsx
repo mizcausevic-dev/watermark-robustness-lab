@@ -45,19 +45,34 @@ export default function CredentialShowdown() {
   const [log, setLog] = useState<string[]>([]);
   const [tick, setTick] = useState(0);
 
-  // init synthetic, watermarked image once
+  // init: load a real generated image, then watermark it once (same-origin so
+  // the canvas isn't tainted and the bytes can be signed). Falls back to the
+  // procedural gradient if the image can't load.
   useEffect(() => {
     const work = document.createElement('canvas');
     work.width = W; work.height = H;
     workRef.current = work;
     const wctx = work.getContext('2d')!;
-    const base = makeBase(wctx);
-    const wm = wctx.createImageData(W, H);
-    injectSynthIDWatermark(base, wm, 3.2);
-    baseRef.current = wm;
-    curRef.current = new ImageData(new Uint8ClampedArray(wm.data), W, H);
-    setWmConf(scanSynthIDWatermark(wm, true));
-    setTick((t) => t + 1);
+
+    const finish = (base: ImageData) => {
+      const wm = wctx.createImageData(W, H);
+      injectSynthIDWatermark(base, wm, 3.2);
+      baseRef.current = wm;
+      curRef.current = new ImageData(new Uint8ClampedArray(wm.data), W, H);
+      setWmConf(scanSynthIDWatermark(wm, true));
+      setTick((t) => t + 1);
+    };
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const scale = Math.max(W / img.width, H / img.height); // cover-fit to square
+      const dw = img.width * scale, dh = img.height * scale;
+      wctx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+      finish(wctx.getImageData(0, 0, W, H));
+    };
+    img.onerror = () => finish(makeBase(wctx));
+    img.src = '/presets/cityscape.jpg';
   }, []);
 
   // paint current image whenever it changes
