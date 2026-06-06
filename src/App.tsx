@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ShieldCheck,
@@ -17,14 +17,30 @@ import {
   ArrowRight,
   Linkedin,
   Github,
-  FileText
+  FileText,
+  Music,
+  Gauge,
+  Stamp
 } from 'lucide-react';
 import ImageSandbox from './components/ImageSandbox';
 import TextBypassSandbox from './components/TextBypassSandbox';
 import ComfyUIWorkflow from './components/ComfyUIWorkflow';
+import CredentialShowdown from './components/CredentialShowdown';
+import AudioLab from './components/AudioLab';
+import AnalysisLab from './components/AnalysisLab';
 import { RESEARCH_BACKGROUNDS } from './data';
 
-type TabId = 'images' | 'text' | 'comfy' | 'research';
+type TabId = 'images' | 'text' | 'audio' | 'analysis' | 'showdown' | 'comfy' | 'research';
+
+const TABS: { id: TabId; label: string; short: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { id: 'images', label: 'Image Lab', short: 'Images', icon: Layers },
+  { id: 'text', label: 'Text Lab', short: 'Text', icon: Tv },
+  { id: 'audio', label: 'Audio Lab', short: 'Audio', icon: Music },
+  { id: 'analysis', label: 'Analysis', short: 'Analysis', icon: Gauge },
+  { id: 'showdown', label: 'Credentials', short: 'Creds', icon: Stamp },
+  { id: 'comfy', label: 'Pipeline', short: 'Pipeline', icon: Network },
+  { id: 'research', label: 'Briefing', short: 'Briefing', icon: BookOpen },
+];
 
 const KG_URL = 'https://kineticgain.com/';
 const TRUST_URL = 'https://kineticgain.com/trust/';
@@ -36,6 +52,16 @@ const ARTICLE_URL = '/why-watermarks-break/';
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('images');
   const [activeBgTopic, setActiveBgTopic] = useState<string>('how_synthid_works');
+
+  const onTabKey = useCallback((e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    const idx = TABS.findIndex((t) => t.id === activeTab);
+    const next = e.key === 'ArrowRight' ? (idx + 1) % TABS.length : (idx - 1 + TABS.length) % TABS.length;
+    setActiveTab(TABS[next].id);
+    const btns = e.currentTarget.querySelectorAll('button');
+    (btns[next] as HTMLButtonElement | undefined)?.focus();
+  }, [activeTab]);
 
   return (
     <div className="min-h-screen bg-[#050508] text-white font-sans selection:bg-cyan-500/25 selection:text-cyan-200 relative overflow-x-hidden">
@@ -68,56 +94,34 @@ export default function App() {
             </div>
           </div>
 
-          <nav className="flex items-center gap-1 sm:gap-2 overflow-x-auto p-0.5 bg-white/5 backdrop-blur-md rounded-xl border border-white/10">
-            <button
-              onClick={() => setActiveTab('images')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition ${
-                activeTab === 'images'
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              <Layers className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Image Lab</span>
-              <span className="sm:hidden">Images</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('text')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition ${
-                activeTab === 'text'
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              <Tv className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Text Lab</span>
-              <span className="sm:hidden">Text</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('comfy')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition ${
-                activeTab === 'comfy'
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              <Network className="w-3.5 h-3.5" />
-              Pipeline
-            </button>
-
-            <button
-              onClick={() => setActiveTab('research')}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition ${
-                activeTab === 'research'
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
-                  : 'text-white/60 hover:text-white'
-              }`}
-            >
-              <BookOpen className="w-3.5 h-3.5" />
-              Briefing
-            </button>
+          <nav
+            role="tablist"
+            aria-label="Lab views (use arrow keys)"
+            onKeyDown={onTabKey}
+            className="flex items-center gap-1 sm:gap-2 overflow-x-auto p-0.5 bg-white/5 backdrop-blur-md rounded-xl border border-white/10"
+          >
+            {TABS.map((t) => {
+              const Icon = t.icon;
+              const active = activeTab === t.id;
+              return (
+                <button
+                  key={t.id}
+                  role="tab"
+                  aria-selected={active}
+                  tabIndex={active ? 0 : -1}
+                  onClick={() => setActiveTab(t.id)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition whitespace-nowrap ${
+                    active
+                      ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
+                      : 'text-white/60 hover:text-white'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span className="hidden sm:inline">{t.label}</span>
+                  <span className="sm:hidden">{t.short}</span>
+                </button>
+              );
+            })}
           </nav>
 
           <a
@@ -206,6 +210,24 @@ export default function App() {
                 transition={{ duration: 0.18 }}
               >
                 <TextBypassSandbox />
+              </motion.div>
+            )}
+
+            {activeTab === 'audio' && (
+              <motion.div key="audio" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} transition={{ duration: 0.18 }}>
+                <AudioLab />
+              </motion.div>
+            )}
+
+            {activeTab === 'analysis' && (
+              <motion.div key="analysis" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} transition={{ duration: 0.18 }}>
+                <AnalysisLab />
+              </motion.div>
+            )}
+
+            {activeTab === 'showdown' && (
+              <motion.div key="showdown" initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -15 }} transition={{ duration: 0.18 }}>
+                <CredentialShowdown />
               </motion.div>
             )}
 
