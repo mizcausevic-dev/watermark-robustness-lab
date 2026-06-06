@@ -14,7 +14,10 @@ import {
   CornerDownRight,
   Info,
   ArrowUpRight,
-  ArrowRight
+  ArrowRight,
+  Linkedin,
+  Github,
+  FileText
 } from 'lucide-react';
 import ImageSandbox from './components/ImageSandbox';
 import TextBypassSandbox from './components/TextBypassSandbox';
@@ -26,6 +29,9 @@ type TabId = 'images' | 'text' | 'comfy' | 'research';
 const KG_URL = 'https://kineticgain.com/';
 const TRUST_URL = 'https://kineticgain.com/trust/';
 const C2PA_URL = 'https://contentcredentials.org/';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/mirzacausevic';
+const REPO_URL = 'https://github.com/mizcausevic-dev/watermark-robustness-lab';
+const ARTICLE_URL = '/why-watermarks-break/';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('images');
@@ -295,8 +301,9 @@ export default function App() {
                           <ShieldCheck className="w-5 h-5 shrink-0" />
                           <p className="text-[11px] font-medium leading-relaxed font-sans text-cyan-100">
                             <strong>Why this lab exists:</strong> mapping where a provenance signal breaks is how you
-                            justify the layer that doesn&apos;t — cryptographic Content Credentials. Explore
-                            {' '}<a href={TRUST_URL} target="_blank" rel="noreferrer" className="underline decoration-dotted hover:text-white">Kinetic Gain&apos;s Trust Pack</a> for the governance side.
+                            justify the layer that doesn&apos;t — cryptographic Content Credentials. Read the full essay,
+                            {' '}<a href={ARTICLE_URL} className="underline decoration-dotted hover:text-white">Why watermarks break</a>,
+                            or explore {' '}<a href={TRUST_URL} target="_blank" rel="noreferrer" className="underline decoration-dotted hover:text-white">Kinetic Gain&apos;s Trust Pack</a> for the governance side.
                           </p>
                         </div>
                       </>
@@ -311,14 +318,43 @@ export default function App() {
 
       </main>
 
-      <footer className="bg-[#050508]/60 backdrop-blur-md border-t border-white/5 flex flex-col sm:flex-row items-center justify-between px-8 text-[10px] text-white/30 font-mono tracking-wider z-10 gap-2 py-4 mt-12 w-full">
-        <div>
-          Educational simulation · no real watermark is processed · nothing leaves your browser
-        </div>
-        <div className="flex flex-wrap gap-x-6 gap-y-1 justify-center">
-          <a href={C2PA_URL} target="_blank" rel="noreferrer" className="hover:text-white/60 transition">The fix → C2PA</a>
-          <a href={KG_URL} target="_blank" rel="noreferrer" className="hover:text-white/60 transition">kineticgain.com</a>
-          <span className="text-white/40">Apache-2.0</span>
+      <footer className="bg-[#050508]/60 backdrop-blur-md border-t border-white/5 z-10 mt-12 w-full">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 py-6 flex flex-col gap-5">
+
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
+            {/* Identity + byline */}
+            <div className="flex flex-col gap-1.5 max-w-md">
+              <div className="flex items-center gap-2 text-white/80 text-xs font-bold">
+                <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                Watermark Robustness Lab
+              </div>
+              <p className="text-[11px] text-white/45 leading-relaxed">
+                Built by <span className="text-white/70 font-semibold">Miz Causevic</span> — Boston Enterprise Technologist.
+                An educational provenance project under <a href={KG_URL} target="_blank" rel="noreferrer" className="text-cyan-400/80 hover:text-cyan-300 underline decoration-dotted">Kinetic Gain</a>.
+              </p>
+            </div>
+
+            {/* Link columns */}
+            <div className="flex flex-wrap gap-x-10 gap-y-5 text-[11px]">
+              <div className="flex flex-col gap-2">
+                <span className="text-[9px] uppercase font-bold tracking-widest text-white/30 font-mono">Learn</span>
+                <a href={ARTICLE_URL} className="flex items-center gap-1.5 text-white/55 hover:text-white transition"><FileText className="w-3.5 h-3.5" /> Why watermarks break</a>
+                <a href={C2PA_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-white/55 hover:text-white transition"><ArrowUpRight className="w-3.5 h-3.5" /> C2PA / Content Credentials</a>
+                <a href={TRUST_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-white/55 hover:text-white transition"><ArrowUpRight className="w-3.5 h-3.5" /> Kinetic Gain Trust Pack</a>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="text-[9px] uppercase font-bold tracking-widest text-white/30 font-mono">Connect</span>
+                <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-white/55 hover:text-white transition"><Linkedin className="w-3.5 h-3.5" /> LinkedIn</a>
+                <a href={KG_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-white/55 hover:text-white transition"><ShieldCheck className="w-3.5 h-3.5" /> kineticgain.com</a>
+                <a href={REPO_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-white/55 hover:text-white transition"><Github className="w-3.5 h-3.5" /> Source (GitHub)</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-4 border-t border-white/5 text-[10px] text-white/30 font-mono tracking-wider">
+            <span>Educational simulation · no real watermark is processed · nothing leaves your browser</span>
+            <span className="text-white/40">Apache-2.0 · © 2026 Miz Causevic</span>
+          </div>
         </div>
       </footer>
 

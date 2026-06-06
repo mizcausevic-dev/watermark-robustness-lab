@@ -2274,7 +2274,7 @@ export default function ImageSandbox() {
           
           {/* Helper canvases hidden in layout to feed pixels */}
           <div className="hidden">
-            <canvas ref={sourceCanvasRef} />
+            <canvas ref={sourceCanvasRef} role="img" aria-label="Source image preview (256x256)" />
           </div>
 
           <AnimatePresence mode="wait">
@@ -2335,12 +2335,12 @@ export default function ImageSandbox() {
                     {/* Simulated Stego Output Viewport */}
                     <div className="flex flex-col gap-2 items-center flex-1">
                       <div className="text-[10px] uppercase tracking-wider font-semibold text-cyan-400 flex items-center gap-1">
-                        Stego Output
+                        Processed Output
                         {isProcessing && <span className="animate-pulse w-1.5 h-1.5 rounded-full bg-cyan-400"></span>}
                       </div>
                       
                       <div className="relative border border-white/10 rounded-xl overflow-hidden bg-black/40 aspect-square w-full max-w-[190px]">
-                        <canvas ref={processedCanvasRef} className="w-full h-full block" />
+                        <canvas ref={processedCanvasRef} role="img" aria-label="Processed image after the selected perturbation" className="w-full h-full block" />
                         
                         {/* Live Scanner Sweep effect if scanner is fully engaged */}
                         {isWatermarked && (
@@ -2349,8 +2349,8 @@ export default function ImageSandbox() {
                       </div>
                       <span className="text-[10px] text-white/50 font-mono">
                         {activeBypass === 'none' 
-                          ? isWatermarked ? 'Watermark Active' : 'Unmodified' 
-                          : `Bypassed via ${BYPASS_METHODS.find(m => m.id === activeBypass)?.name}`}
+                          ? isWatermarked ? 'Watermark Active' : 'Unmodified'
+                          : `Perturbed via ${BYPASS_METHODS.find(m => m.id === activeBypass)?.name}`}
                       </span>
                     </div>
                   </div>
@@ -2367,7 +2367,7 @@ export default function ImageSandbox() {
                     >
                       {/* Underlay (Right Side / Full Canvas): Stego Output */}
                       <div className="absolute inset-0 w-full h-full">
-                        <canvas ref={processedCanvasRef} className="w-full h-full block" />
+                        <canvas ref={processedCanvasRef} role="img" aria-label="Processed image after the selected perturbation" className="w-full h-full block" />
                       </div>
 
                       {/* Overlay (Left Side / Clipped Image): Original Image */}
@@ -2385,7 +2385,7 @@ export default function ImageSandbox() {
                         Original
                       </div>
                       <div className="absolute bottom-3 right-3 bg-cyan-950/80 px-2 py-0.5 rounded text-[8px] font-bold text-cyan-300 uppercase tracking-widest pointer-events-none select-none border border-cyan-500/10 shadow-md">
-                        Stego
+                        Marked
                       </div>
 
                       {/* Continuous scanning beam on the Stego side */}
@@ -2415,8 +2415,8 @@ export default function ImageSandbox() {
                       <span className="text-white/40 uppercase tracking-wider text-[9px]">Drag slider to compare</span>
                       <span>
                         {activeBypass === 'none' 
-                          ? isWatermarked ? 'Watermarked Output' : 'Watermark Off / Clear' 
-                          : `Bypassed (${BYPASS_METHODS.find(m => m.id === activeBypass)?.name})`}
+                          ? isWatermarked ? 'Watermarked Output' : 'Watermark Off / Clear'
+                          : `Perturbed (${BYPASS_METHODS.find(m => m.id === activeBypass)?.name})`}
                       </span>
                     </div>
                   </div>
@@ -2442,7 +2442,7 @@ export default function ImageSandbox() {
                 </div>
                 
                 <div className="relative border border-white/10 rounded-xl overflow-hidden bg-black/40 aspect-square w-48 shadow-lg shadow-cyan-950/20">
-                  <canvas ref={patternCanvasRef} className="w-full h-full block" />
+                  <canvas ref={patternCanvasRef} role="img" aria-label="Amplified difference view revealing the synthetic watermark carrier rings" className="w-full h-full block" />
                 </div>
                 
                 <div className="text-[10px] font-mono text-white/50 max-w-sm leading-relaxed px-4">
@@ -2479,10 +2479,12 @@ export default function ImageSandbox() {
                 <div className="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-lg">
                   {/* FFT Canvas container */}
                   <div className="relative border border-white/10 rounded-xl overflow-hidden bg-black/40 aspect-square w-40 select-none">
-                    <canvas 
+                    <canvas
                       ref={fftCanvasRef}
                       data-ref="fftCanvasRef"
-                      className="w-full h-full block cursor-crosshair" 
+                      role="img"
+                      aria-label="Frequency-domain (FFT) magnitude view; the carrier appears as a ring near radius 42 pixels"
+                      className="w-full h-full block cursor-crosshair"
                       onMouseMove={handleFftMouseMove}
                       onMouseLeave={handleFftMouseLeave}
                       onWheel={(e) => {
@@ -2713,7 +2715,7 @@ export default function ImageSandbox() {
                     </div>
 
                     <div className="relative flex-grow h-24 my-1 bg-black/45 border border-white/5 rounded-lg overflow-hidden">
-                      <canvas ref={fftHistogramRef} className="w-full h-full block" />
+                      <canvas ref={fftHistogramRef} role="img" aria-label="FFT radial power histogram across frequency bands" className="w-full h-full block" />
                     </div>
 
                     <div className="flex justify-between items-center text-[7.5px] font-mono text-white/50 px-0.5 pt-1.5 border-t border-white/5">
@@ -3295,7 +3297,7 @@ export default function ImageSandbox() {
           <div className="flex items-center gap-2">
             <Cpu className="w-5 h-5 text-cyan-400" />
             <h3 className="text-sm font-semibold tracking-wide uppercase text-white/90">
-              Stego Detection Scanner
+              Carrier Detection Scanner
             </h3>
           </div>
 
