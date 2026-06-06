@@ -8,6 +8,7 @@ import {
   applyGaussianBlurSimulation, applyCropAndScaleSimulation,
 } from '../utils/imageFilters';
 import { psnr, ssim, percentChanged, diffHeatmap } from '../utils/metrics';
+import { InfoTip } from './Tooltip';
 
 const S = 200;
 type Attack = 'notch' | 'jitter' | 'quantize' | 'denoise' | 'jpeg' | 'blur' | 'crop';
@@ -176,7 +177,7 @@ export default function AnalysisLab() {
               className="w-full h-1 bg-white/10 rounded appearance-none accent-cyan-400 cursor-pointer" />
           </div>
           <div>
-            <div className="flex justify-between text-[10px] font-mono text-white/60"><span>Detector threshold</span><span className="text-indigo-300 font-bold">{threshold}%</span></div>
+            <div className="flex justify-between text-[10px] font-mono text-white/60"><span className="flex items-center">Detector threshold<InfoTip label="The score above which the detector calls a watermark 'present'. Detection is a policy choice — move this and the same asset can flip verdict." /></span><span className="text-indigo-300 font-bold">{threshold}%</span></div>
             <input type="range" min="0" max="100" step="5" value={threshold} onChange={(e) => setThreshold(parseInt(e.target.value))}
               className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer" />
           </div>
@@ -221,14 +222,14 @@ export default function AnalysisLab() {
         {/* metric tiles */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            ['Detection', metrics ? `${metrics.detection}%` : '—', detected ? 'text-rose-300' : 'text-emerald-300'],
-            ['PSNR', metrics ? `${metrics.psnr.toFixed(1)} dB` : '—', 'text-cyan-300'],
-            ['SSIM', metrics ? metrics.ssim.toFixed(3) : '—', 'text-cyan-300'],
-            ['Pixels changed', metrics ? `${metrics.changed.toFixed(1)}%` : '—', 'text-indigo-300'],
-          ].map(([k, v, cls], i) => (
+            { k: 'Detection', v: metrics ? `${metrics.detection}%` : '—', cls: detected ? 'text-rose-300' : 'text-emerald-300', tip: 'How strongly the synthetic carrier is still detectable after the attack (0–100%).' },
+            { k: 'PSNR', v: metrics ? `${metrics.psnr.toFixed(1)} dB` : '—', cls: 'text-cyan-300', tip: 'Peak Signal-to-Noise Ratio (dB). Higher = closer to the original; above ~40 dB the change is hard to see by eye.' },
+            { k: 'SSIM', v: metrics ? metrics.ssim.toFixed(3) : '—', cls: 'text-cyan-300', tip: 'Structural Similarity (0–1). 1 = identical structure. Measures perceived quality, not just raw pixel error.' },
+            { k: 'Pixels changed', v: metrics ? `${metrics.changed.toFixed(1)}%` : '—', cls: 'text-indigo-300', tip: 'Share of pixels whose colour shifted by more than a small threshold after the attack.' },
+          ].map((m, i) => (
             <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col gap-0.5">
-              <span className="text-[9px] uppercase font-bold tracking-widest text-white/35 font-mono">{k as string}</span>
-              <span className={`text-xl font-extrabold font-mono ${cls as string}`}>{v as string}</span>
+              <span className="text-[9px] uppercase font-bold tracking-widest text-white/35 font-mono flex items-center">{m.k}<InfoTip label={m.tip} /></span>
+              <span className={`text-xl font-extrabold font-mono ${m.cls}`}>{m.v}</span>
             </div>
           ))}
         </div>

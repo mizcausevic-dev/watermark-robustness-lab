@@ -158,7 +158,7 @@ export const INITIAL_COMFY_NODES: ComfyNode[] = [
   },
   {
     id: '4',
-    title: 'Encode with Noise Jitter',
+    title: 'Quantize Bottleneck',
     type: 'encoder',
     inputs: ['IMAGE'],
     outputs: ['LATENT'],
@@ -167,7 +167,7 @@ export const INITIAL_COMFY_NODES: ComfyNode[] = [
   },
   {
     id: '5',
-    title: 'Resample (Low Denoise)',
+    title: 'Bilateral Denoise',
     type: 'sampler',
     inputs: ['LATENT'],
     outputs: ['LATENT'],

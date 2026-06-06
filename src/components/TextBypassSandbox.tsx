@@ -10,6 +10,7 @@ import {
   Check,
   Sliders
 } from 'lucide-react';
+import { InfoTip } from './Tooltip';
 
 type Sample = { id: string; label: string; text: string; rephrased: string };
 
@@ -412,7 +413,7 @@ export default function TextBypassSandbox() {
               <div className={`text-4xl font-extrabold tracking-tight font-mono ${isBypassed ? 'text-emerald-400' : 'text-red-400 animate-pulse'}`}>
                 {zScore}
               </div>
-              <div className="text-[10px] uppercase tracking-wider font-semibold text-white/40">Detector Z-Score</div>
+              <div className="text-[10px] uppercase tracking-wider font-semibold text-white/40 flex items-center justify-center">Detector Z-Score<InfoTip label="Standard score for how skewed the word choice is. Above 1.96 (95% confidence) the favored-token bias is statistically improbable for human writing." /></div>
 
               <div className={`text-[10px] px-2.5 py-1 font-bold rounded flex items-center gap-1.5 ${
                 isBypassed ? 'bg-emerald-500/10 border border-emerald-500/35 text-emerald-400' : 'bg-red-500/10 border border-red-500/35 text-rose-400'
@@ -454,7 +455,7 @@ export default function TextBypassSandbox() {
 
             <div className="bg-black/40 border border-white/10 rounded-xl p-3 text-[10px] font-mono text-white/50 space-y-1.5">
               <div className="flex justify-between">
-                <span>Favored Token Share:</span>
+                <span className="flex items-center">Favored Token Share:<InfoTip label="Share of words the watermark nudged the model to prefer. An improbably high share (vs a 50% baseline) is the statistical fingerprint." /></span>
                 <span className={isBypassed ? "text-white/70" : "text-emerald-400"}>{greenRatio}% (vs 50% baseline)</span>
               </div>
               <div className="flex justify-between"><span>Preceding Context Hash N:</span><span className="text-white/70">4 tokens</span></div>

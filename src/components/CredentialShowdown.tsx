@@ -7,6 +7,7 @@ import {
   applyBrightnessShift, applyCropAndScaleSimulation, applyNeuralDenoise,
 } from '../utils/imageFilters';
 import { sha256Hex } from '../utils/metrics';
+import { InfoTip } from './Tooltip';
 
 const W = 224;
 const H = 224;
@@ -239,9 +240,9 @@ export default function CredentialShowdown() {
             )}
           </div>
           <div className="bg-black/30 border border-white/10 rounded-lg p-3 text-[10px] font-mono text-white/50 space-y-1">
-            <div className="flex justify-between"><span>Algorithm</span><span className="text-white/70">ECDSA P-256</span></div>
-            <div className="flex justify-between"><span>Binding</span><span className="text-white/70">SHA-256</span></div>
-            <div className="flex justify-between gap-2"><span>Content hash</span>
+            <div className="flex justify-between"><span className="flex items-center">Algorithm<InfoTip label="ECDSA on the NIST P-256 curve — an elliptic-curve digital signature. Only the holder of the private key can produce a signature that verifies." /></span><span className="text-white/70">ECDSA P-256</span></div>
+            <div className="flex justify-between"><span className="flex items-center">Binding<InfoTip label="SHA-256 hash of the asset. Any byte change yields a completely different hash, so tampering is detectable." /></span><span className="text-white/70">SHA-256</span></div>
+            <div className="flex justify-between gap-2"><span className="flex items-center">Content hash<InfoTip label="SHA-256 of the current image bytes. The credential verifies only if this still matches what was signed." /></span>
               <span className="text-white/70 truncate max-w-[120px]">{contentHash ? contentHash.slice(0, 16) + '…' : '—'}</span></div>
           </div>
           <p className="text-[11px] text-white/55 leading-relaxed">
