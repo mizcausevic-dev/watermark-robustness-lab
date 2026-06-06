@@ -193,7 +193,7 @@ export default function ComfyUIWorkflow() {
 
           <button
             onClick={autoAlignNodes}
-            className="bg-cyan-500/10 hover:bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 hover:text-cyan-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer shadow-[0_0_8px_rgba(34,211,238,0.15)]"
+            className="bg-cyan-500/10 hover:bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 hover:text-cyan-200 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer shadow-[0_0_8px_rgba(203,242,76,0.15)]"
           >
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             Auto-Align
@@ -256,7 +256,7 @@ export default function ComfyUIWorkflow() {
                   key={edge.id}
                   d={`M ${startX} ${startY} C ${cp1X} ${cp1Y}, ${cp2X} ${cp2Y}, ${endX} ${endY}`}
                   fill="none"
-                  stroke={fromNode.type === 'bypass' ? 'rgba(236, 72, 153, 0.7)' : 'rgba(34, 211, 238, 0.45)'}
+                  stroke={fromNode.type === 'bypass' ? 'rgba(236, 72, 153, 0.7)' : 'rgba(203, 242, 76, 0.45)'}
                   strokeWidth="2.5"
                   className={isRunning ? "stroke-dash-animated" : ""}
                 />

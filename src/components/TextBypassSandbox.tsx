@@ -528,7 +528,7 @@ export default function TextBypassSandbox() {
               onClick={() => handleApplyTacticText('none')}
               className={`p-2 rounded-lg border text-left flex items-start gap-2.5 transition cursor-pointer ${
                 activeTactic === 'none'
-                  ? 'bg-white/10 border-white/20 text-cyan-200 shadow-[0_0_8px_rgba(34,211,238,0.1)]'
+                  ? 'bg-white/10 border-white/20 text-cyan-200 shadow-[0_0_8px_rgba(203,242,76,0.1)]'
                   : 'bg-black/30 border-white/5 hover:border-white/10 text-white/60 hover:text-white'
               }`}
             >
@@ -548,7 +548,7 @@ export default function TextBypassSandbox() {
               onClick={() => handleApplyTacticText('synonyms')}
               className={`p-2.5 rounded-lg border text-left flex items-start gap-2.5 transition cursor-pointer ${
                 activeTactic === 'synonyms'
-                  ? 'bg-white/10 border-cyan-500/40 text-cyan-200 shadow-[0_0_8px_rgba(34,211,238,0.15)]'
+                  ? 'bg-white/10 border-cyan-500/40 text-cyan-200 shadow-[0_0_8px_rgba(203,242,76,0.15)]'
                   : 'bg-black/30 border-white/5 hover:border-white/10 text-white/60 hover:text-white'
               }`}
             >
@@ -568,7 +568,7 @@ export default function TextBypassSandbox() {
               onClick={() => handleApplyTacticText('homoglyphs')}
               className={`p-2.5 rounded-lg border text-left flex items-start gap-2.5 transition cursor-pointer ${
                 activeTactic === 'homoglyphs'
-                  ? 'bg-white/10 border-cyan-500/40 text-cyan-200 shadow-[0_0_8px_rgba(34,211,238,0.15)]'
+                  ? 'bg-white/10 border-cyan-500/40 text-cyan-200 shadow-[0_0_8px_rgba(203,242,76,0.15)]'
                   : 'bg-black/30 border-white/5 hover:border-white/10 text-white/60 hover:text-white'
               }`}
             >
@@ -588,7 +588,7 @@ export default function TextBypassSandbox() {
               onClick={() => handleApplyTacticText('rephrase')}
               className={`p-2.5 rounded-lg border text-left flex items-start gap-2.5 transition cursor-pointer ${
                 activeTactic === 'rephrase'
-                  ? 'bg-white/10 border-cyan-500/40 text-cyan-200 shadow-[0_0_8px_rgba(34,211,238,0.15)]'
+                  ? 'bg-white/10 border-cyan-500/40 text-cyan-200 shadow-[0_0_8px_rgba(203,242,76,0.15)]'
                   : 'bg-black/30 border-white/5 hover:border-white/10 text-white/60 hover:text-white'
               }`}
             >

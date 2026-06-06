@@ -65,7 +65,7 @@ export default function App() {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-[#050508] text-white font-sans selection:bg-cyan-500/25 selection:text-cyan-200 relative overflow-x-hidden">
+    <div className="min-h-screen bg-[#0D0F13] text-white font-sans selection:bg-cyan-500/25 selection:text-cyan-200 relative overflow-x-hidden">
 
       {/* Animated Mesh Background Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/20 rounded-full blur-[120px] pointer-events-none" />
@@ -111,7 +111,7 @@ export default function App() {
                   onClick={() => setActiveTab(t.id)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition whitespace-nowrap ${
                     active
-                      ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.25)]'
+                      ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(203,242,76,0.25)]'
                       : 'text-white/60 hover:text-white'
                   }`}
                 >
@@ -264,7 +264,7 @@ export default function App() {
                       onClick={() => setActiveBgTopic(t.id)}
                       className={`p-3 text-left rounded-xl border transition flex items-center justify-between gap-3 cursor-pointer ${
                         activeBgTopic === t.id
-                          ? 'bg-white/10 border-cyan-500/40 text-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.15)]'
+                          ? 'bg-white/10 border-cyan-500/40 text-cyan-300 shadow-[0_0_12px_rgba(203,242,76,0.15)]'
                           : 'bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 text-white/60'
                       }`}
                     >
@@ -339,7 +339,7 @@ export default function App() {
 
       </main>
 
-      <footer className="bg-[#050508]/60 backdrop-blur-md border-t border-white/5 z-10 mt-12 w-full">
+      <footer className="bg-[#0D0F13]/60 backdrop-blur-md border-t border-white/5 z-10 mt-12 w-full">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 py-6 flex flex-col gap-5">
 
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">

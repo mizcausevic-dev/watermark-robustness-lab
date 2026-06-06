@@ -1,17 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 @import "tailwindcss";
 
-/* Brand typography: Space Grotesk (display/UI) + Space Mono (data). These
-   feed Tailwind's font-sans / font-mono utilities used throughout the app. */
+/*
+ * Brand system (from the Signal Seal kit), mapped onto the color scales the app
+ * already uses so utilities re-render in brand colors with no per-component churn:
+ *   cyan + emerald  -> SIGNAL lime  (#CBF24C / deep #A6CC2C) — present / valid / primary
+ *   rose + red      -> ATTACK red   (#FF4A2E)                — removed / invalid / failure
+ *   amber stays                                              — caution (the scope banner)
+ * Two accents carry meaning; ink + neutral surfaces carry everything else.
+ */
 @theme {
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* SIGNAL — lime (was cyan / emerald) */
+  --color-cyan-100: #f2fbcf;
+  --color-cyan-200: #e6f7a8;
+  --color-cyan-300: #d8f06a;
+  --color-cyan-400: #cbf24c;
+  --color-cyan-500: #a6cc2c;
+  --color-cyan-800: #4f6312;
+  --color-cyan-900: #3a490d;
+  --color-cyan-950: #26310a;
+  --color-emerald-200: #e6f7a8;
+  --color-emerald-300: #d8f06a;
+  --color-emerald-400: #cbf24c;
+  --color-emerald-500: #a6cc2c;
+
+  /* ATTACK — red (was rose / red) */
+  --color-rose-300: #ff8e79;
+  --color-rose-400: #ff4a2e;
+  --color-rose-500: #ef371c;
+  --color-red-300: #ff8e79;
+  --color-red-400: #ff4a2e;
+  --color-red-500: #ef371c;
 }
 
 /*
- * Accessibility: honour the OS "reduce motion" preference. This calms the
- * always-on pulse/scan animations for users who are motion-sensitive (and, as a
- * bonus, lets the page reach paint-idle for screenshot/automation tooling).
+ * Accessibility: honour the OS "reduce motion" preference. Calms the always-on
+ * pulse/scan animations for motion-sensitive users (and lets the page reach
+ * paint-idle for screenshot/automation tooling).
  */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -26,7 +54,7 @@
 
 /* Visible focus ring for keyboard users navigating the tablist + controls. */
 :focus-visible {
-  outline: 2px solid rgba(34, 211, 238, 0.7);
+  outline: 2px solid rgba(203, 242, 76, 0.7);
   outline-offset: 2px;
   border-radius: 4px;
 }
