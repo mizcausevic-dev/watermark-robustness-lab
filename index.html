@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050508" />
+
+    <title>Watermark Robustness Lab — Why AI Content Watermarks Are Fragile | Kinetic Gain</title>
+    <meta
+      name="description"
+      content="An interactive teaching lab showing why pixel- and token-level AI watermarks (the steganographic approach used by systems like SynthID) are fragile against ordinary image and text edits — and why durable content provenance needs cryptographic Content Credentials (C2PA). Educational simulation; does not process real SynthID."
+    />
+    <meta name="keywords" content="AI watermark robustness, content provenance, C2PA, Content Credentials, AI content authenticity, watermark fragility, AI transparency, EU AI Act Article 50, NIST AI RMF, deepfake provenance" />
+    <meta name="author" content="Miz Causevic — Kinetic Gain" />
+    <link rel="canonical" href="https://provenance-lab.kineticgain.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kinetic Gain" />
+    <meta property="og:title" content="Watermark Robustness Lab — Why AI Content Watermarks Are Fragile" />
+    <meta
+      property="og:description"
+      content="Interactive lab: see how routine edits disrupt pixel & token watermarks, and why durable provenance needs cryptographic Content Credentials (C2PA). Educational simulation."
+    />
+    <meta property="og:url" content="https://provenance-lab.kineticgain.com/" />
+    <meta property="og:image" content="https://provenance-lab.kineticgain.com/og-cover.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Watermark Robustness Lab — Why AI Content Watermarks Are Fragile" />
+    <meta
+      name="twitter:description"
+      content="Interactive lab on watermark fragility and the case for cryptographic content provenance (C2PA). Educational simulation."
+    />
+    <meta name="twitter:image" content="https://provenance-lab.kineticgain.com/og-cover.png" />
+
+    <!-- Answer-engine / structured data: declares what this is and, critically, what it is NOT -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      "name": "Watermark Robustness Lab",
+      "description": "Interactive educational simulation demonstrating why pixel- and token-level AI content watermarks are fragile against routine edits, and why cryptographic content provenance (C2PA / Content Credentials) is the durable alternative.",
+      "url": "https://provenance-lab.kineticgain.com/",
+      "learningResourceType": "Interactive simulation",
+      "educationalLevel": "Professional",
+      "inLanguage": "en",
+      "about": [
+        { "@type": "Thing", "name": "AI content provenance" },
+        { "@type": "Thing", "name": "Digital watermarking robustness" },
+        { "@type": "Thing", "name": "C2PA Content Credentials" }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "AI governance, trust & safety, and content-provenance practitioners"
+      },
+      "isAccessibleForFree": true,
+      "creator": {
+        "@type": "Person",
+        "name": "Miz Causevic",
+        "url": "https://kineticgain.com/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Kinetic Gain",
+        "url": "https://kineticgain.com/"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does this tool remove or bypass Google SynthID?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Watermark Robustness Lab is an educational simulation. It injects a synthetic, self-authored watermark and analyzes that signal in your browser. It does not detect, contain, or remove Google SynthID or any production watermark, and it never uploads your content."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are AI image and text watermarks reliable for proving content origin?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pixel- and token-level watermarks are robust against many casual transformations but remain fragile against targeted edits such as frequency-band filtering, re-encoding, rescaling, paraphrasing, and character substitution. Because robustness is not guaranteed, watermarking is best treated as one signal among several rather than as proof of origin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the durable alternative to fragile watermarks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cryptographically signed provenance — the C2PA standard and Content Credentials — binds tamper-evident, verifiable metadata to media. Unlike steganographic watermarks, a broken or stripped credential is detectable, which makes provenance auditable rather than merely probabilistic."
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

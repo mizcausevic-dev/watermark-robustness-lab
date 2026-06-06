@@ -1,0 +1,6 @@
+{
+  "name": "Watermark Robustness Lab",
+  "description": "Interactive teaching lab on the fragility of AI content watermarks (pixel & token steganography) and the case for cryptographic content provenance (C2PA / Content Credentials). Educational simulation — no real SynthID is processed and no content leaves the browser.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
