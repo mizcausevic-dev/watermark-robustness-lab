@@ -13,20 +13,20 @@ export const IMAGE_PRESETS: ImagePreset[] = [
   {
     id: 'portrait',
     name: 'High-Fidelity Portrait',
-    url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=320&auto=format&fit=crop',
-    description: 'High-contrast neural render. High-contrast regions are where a frequency-domain carrier would sit most strongly.'
+    url: '/presets/portrait.jpg',
+    description: 'Photoreal synthetic face — the deepfake-provenance case. Sharp eye and hair edges hold the strongest frequency-domain carrier; smooth skin reveals it once amplified.'
   },
   {
     id: 'cityscape',
     name: 'Detailed Cityscape',
-    url: 'https://images.unsplash.com/photo-1515621061946-eff1c2a352bd?q=80&w=320&auto=format&fit=crop',
-    description: 'Dense high-frequency detail, typical of diffusion-model output where carrier energy is easy to hide.'
+    url: '/presets/cityscape.jpg',
+    description: 'Dense high-frequency detail, typical of diffusion-model output — the regime where a low-amplitude carrier hides best and survives casual edits.'
   },
   {
     id: 'soft_gradient',
     name: 'Soft Gradient Study',
-    url: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=320&auto=format&fit=crop',
-    description: 'Warm gradients and smooth lighting — the regime where a hidden carrier is most visible once amplified.'
+    url: '/presets/gradient.jpg',
+    description: 'Smooth low-frequency gradient — where a hidden carrier is most visible once amplified and most fragile: denoise or quantize wipes it and bands.'
   }
 ];
 
