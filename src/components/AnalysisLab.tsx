@@ -245,7 +245,7 @@ export default function AnalysisLab() {
                 <text key={v} x="28" y={116 - (v / 100) * 106 + 3} textAnchor="end" className="fill-white/30" fontSize="7">{v}</text>
               ))}
               {(['det', 'ssim'] as const).map((key) => {
-                const stroke = key === 'det' ? '#CBF24C' : '#a78bfa';
+                const stroke = key === 'det' ? '#00E5FF' : '#a78bfa';
                 const d = curve.map((p, i) => {
                   const x = 34 + (p.i / 100) * 276;
                   const val = key === 'det' ? p.det : p.ssim * 100;

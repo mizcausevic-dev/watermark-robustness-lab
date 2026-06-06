@@ -8,8 +8,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 INK = (13, 15, 19)
 PAPER = (243, 239, 230)
-SIGNAL = (203, 242, 76)
-SIGNAL_DEEP = (166, 204, 44)
+SIGNAL = (0, 229, 255)
+SIGNAL_DEEP = (6, 125, 151)
 ATTACK = (255, 74, 46)
 MUTE = (138, 143, 153)
 FAINT = tuple(round(p * 0.45 + i * 0.55) for p, i in zip(PAPER, INK))
@@ -132,7 +132,7 @@ def linkedin():
     img.paste(seal(230), (W - 230 - 120, (H - 230) // 2), seal(230))
     d.text((100, 96), "// CONTENT PROVENANCE, MEASURED", font=mono(18), fill=ATTACK)
     d.text((100, 138), "Watermark Stress Test", font=grotesk(64), fill=PAPER)
-    d.text((100, 232), "See why AI watermarks break — and the case for Content Credentials (C2PA).", font=mono(19, False), fill=MUTE)
+    d.text((100, 232), "Hidden AI watermarks break. C2PA is the fix.", font=mono(19, False), fill=MUTE)
     img.save(f"{OUT_SOC}/social-linkedin-banner.png", "PNG")
     print("social-linkedin-banner.png")
 

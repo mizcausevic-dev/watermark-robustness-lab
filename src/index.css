@@ -4,8 +4,8 @@
 /*
  * Brand system (from the Signal Seal kit), mapped onto the color scales the app
  * already uses so utilities re-render in brand colors with no per-component churn:
- *   cyan + emerald  -> SIGNAL lime  (#CBF24C / deep #A6CC2C) — present / valid / primary
- *   rose + red      -> ATTACK red   (#FF4A2E)                — removed / invalid / failure
+ *   cyan + emerald  -> SIGNAL aqua  (#00E5FF / deep #067D97) — C2PA-verified / present / primary
+ *   rose + red      -> ATTACK red   (#FF4A2E)                — watermark broken / removed / failure
  *   amber stays                                              — caution (the scope banner)
  * Two accents carry meaning; ink + neutral surfaces carry everything else.
  */
@@ -13,19 +13,19 @@
   --font-sans: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: "Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  /* SIGNAL — lime (was cyan / emerald) */
-  --color-cyan-100: #f2fbcf;
-  --color-cyan-200: #e6f7a8;
-  --color-cyan-300: #d8f06a;
-  --color-cyan-400: #cbf24c;
-  --color-cyan-500: #a6cc2c;
-  --color-cyan-800: #4f6312;
-  --color-cyan-900: #3a490d;
-  --color-cyan-950: #26310a;
-  --color-emerald-200: #e6f7a8;
-  --color-emerald-300: #d8f06a;
-  --color-emerald-400: #cbf24c;
-  --color-emerald-500: #a6cc2c;
+  /* SIGNAL — electric aqua (was cyan / emerald) */
+  --color-cyan-100: #d6fbff;
+  --color-cyan-200: #a6f5ff;
+  --color-cyan-300: #5cedff;
+  --color-cyan-400: #00e5ff;
+  --color-cyan-500: #0aa8c4;
+  --color-cyan-800: #0a5666;
+  --color-cyan-900: #08323d;
+  --color-cyan-950: #04222b;
+  --color-emerald-200: #a6f5ff;
+  --color-emerald-300: #5cedff;
+  --color-emerald-400: #00e5ff;
+  --color-emerald-500: #0aa8c4;
 
   /* ATTACK — red (was rose / red) */
   --color-rose-300: #ff8e79;
@@ -54,7 +54,7 @@
 
 /* Visible focus ring for keyboard users navigating the tablist + controls. */
 :focus-visible {
-  outline: 2px solid rgba(203, 242, 76, 0.7);
+  outline: 2px solid rgba(0, 229, 255, 0.7);
   outline-offset: 2px;
   border-radius: 4px;
 }

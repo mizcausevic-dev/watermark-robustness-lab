@@ -989,7 +989,7 @@ export default function ImageSandbox() {
     ctx.lineTo(getXCoord(originalPoints[originalPoints.length - 1].r), h - paddingBottom);
     ctx.lineTo(getXCoord(originalPoints[0].r), h - paddingBottom);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(203, 242, 76, 0.05)';
+    ctx.fillStyle = 'rgba(0, 229, 255, 0.05)';
     ctx.fill();
 
     // Outline
@@ -998,7 +998,7 @@ export default function ImageSandbox() {
     for (let i = 1; i < originalPoints.length; i++) {
       ctx.lineTo(getXCoord(originalPoints[i].r), getYCoord(originalPoints[i].power));
     }
-    ctx.strokeStyle = '#CBF24C';
+    ctx.strokeStyle = '#00E5FF';
     ctx.lineWidth = 1.0;
     ctx.stroke();
     ctx.restore();
@@ -1079,7 +1079,7 @@ export default function ImageSandbox() {
     const ringColor2 = (alpha: number) => isHighContrast ? `rgba(255, 255, 255, ${alpha * 0.45})` : `rgba(6, 182, 212, ${alpha * 0.45})`;
     const jitterColor = (alpha: number) => isHighContrast ? `rgba(255, 255, 255, ${alpha})` : `rgba(236, 72, 153, ${alpha})`;
     const notchStroke = isHighContrast ? 'rgba(255, 255, 255, 0.25)' : 'rgba(239, 68, 68, 0.3)';
-    const hudMainColor = isHighContrast ? '#ffffff' : '#CBF24C';
+    const hudMainColor = isHighContrast ? '#ffffff' : '#00E5FF';
     const hudBg = isHighContrast ? 'rgba(0, 0, 0, 0.95)' : 'rgba(10, 13, 20, 0.8)';
 
     ctx.fillStyle = bgFill;
@@ -1134,7 +1134,7 @@ export default function ImageSandbox() {
     const breathFactor = 0.75 + 0.25 * Math.sin(Date.now() / 1500);
     const gridStroke = isHighContrast 
       ? `rgba(255, 255, 255, ${0.18 * fftOverlayOpacity * ringOpacityFactor * breathFactor})` 
-      : `rgba(203, 242, 76, ${0.18 * fftOverlayOpacity * ringOpacityFactor * breathFactor})`;
+      : `rgba(0, 229, 255, ${0.18 * fftOverlayOpacity * ringOpacityFactor * breathFactor})`;
     ctx.strokeStyle = gridStroke;
     ctx.lineWidth = activeLegendHighlight === 'zone' ? 1.4 : 0.8;
     ctx.setLineDash(activeLegendHighlight === 'zone' ? [] : [2, 2]); // solid rings when highlighted
@@ -1207,7 +1207,7 @@ export default function ImageSandbox() {
       const txtOpacity = Math.max(0.4, fftOverlayOpacity) * ringOpacityFactor;
       ctx.fillStyle = isHighContrast 
         ? `rgba(255, 255, 255, ${txtOpacity})` 
-        : `rgba(203, 242, 76, ${txtOpacity})`;
+        : `rgba(0, 229, 255, ${txtOpacity})`;
       
       // Alternate positioning angle dynamically based on active scaling to prevent overlapping of adjacent target rings
       const radiusIndex = Math.round(radiusVal / gridStep);
@@ -1242,7 +1242,7 @@ export default function ImageSandbox() {
 
     ctx.strokeStyle = isHighContrast 
       ? `rgba(255, 255, 255, ${0.08 * fftOverlayOpacity * ringOpacityFactor * breathFactor})` 
-      : `rgba(203, 242, 76, ${0.08 * fftOverlayOpacity * ringOpacityFactor * breathFactor})`;
+      : `rgba(0, 229, 255, ${0.08 * fftOverlayOpacity * ringOpacityFactor * breathFactor})`;
     ctx.lineWidth = activeLegendHighlight === 'zone' ? 1.0 : 0.5;
     ctx.setLineDash(activeLegendHighlight === 'zone' ? [] : [1, 4]);
 
@@ -1288,7 +1288,7 @@ export default function ImageSandbox() {
       cardGrd.addColorStop(0.4, 'rgba(100, 100, 100, 0.2)');
       cardGrd.addColorStop(1, 'rgba(0,0,0,0)');
     } else {
-      cardGrd.addColorStop(0, 'rgba(203, 242, 76, 0.9)');
+      cardGrd.addColorStop(0, 'rgba(0, 229, 255, 0.9)');
       cardGrd.addColorStop(0.1, 'rgba(8, 145, 178, 0.6)');
       cardGrd.addColorStop(0.4, 'rgba(8, 145, 178, 0.2)');
       cardGrd.addColorStop(1, 'rgba(0,0,0,0)');
@@ -1499,7 +1499,7 @@ export default function ImageSandbox() {
 
       const labelText = `${Math.abs(k * gridStep)}px`;
       ctx.strokeText(labelText, xVal, cy + 4.5);
-      ctx.fillStyle = isHighContrast ? '#ffffff' : '#CBF24C';
+      ctx.fillStyle = isHighContrast ? '#ffffff' : '#00E5FF';
       ctx.fillText(labelText, xVal, cy + 4.5);
     }
 
@@ -1861,11 +1861,11 @@ export default function ImageSandbox() {
           ? `rgba(74, 222, 128, ${Math.min(1.0, peakOpacityFactor)})`
           : (isHighContrast 
             ? `rgba(255, 255, 255, ${Math.min(1.0, peakOpacityFactor)})` 
-            : `rgba(203, 242, 76, ${Math.min(1.0, peakOpacityFactor)})`);
+            : `rgba(0, 229, 255, ${Math.min(1.0, peakOpacityFactor)})`);
 
         // Stark/Cyan/Green crosshair with subtle glow
         ctx.shadowBlur = isLocked ? (activeLegendHighlight === 'peak' ? 12 : 6) : (isHighContrast ? 2 : (activeLegendHighlight === 'peak' ? 10 : 4));
-        ctx.shadowColor = isLocked ? '#CBF24C' : hudMainColor;
+        ctx.shadowColor = isLocked ? '#00E5FF' : hudMainColor;
         ctx.strokeStyle = currentPeakColor;
         ctx.lineWidth = activeLegendHighlight === 'peak' ? 1.5 : 1;
 
@@ -1898,7 +1898,7 @@ export default function ImageSandbox() {
           ctx.beginPath();
           ctx.strokeStyle = isLocked
             ? `rgba(74, 222, 128, ${rippleAlpha})`
-            : (isHighContrast ? `rgba(255, 255, 255, ${rippleAlpha})` : `rgba(203, 242, 76, ${rippleAlpha})`);
+            : (isHighContrast ? `rgba(255, 255, 255, ${rippleAlpha})` : `rgba(0, 229, 255, ${rippleAlpha})`);
           ctx.arc(peakX, peakY, rippleRadius, 0, Math.PI * 2);
           ctx.stroke();
         }
@@ -1919,7 +1919,7 @@ export default function ImageSandbox() {
 
             // Small dot at the exact spike location
             ctx.beginPath();
-            ctx.fillStyle = idx === 0 ? (isSpikeLocked ? '#CBF24C' : hudMainColor) : 'rgba(165, 243, 252, 0.7)';
+            ctx.fillStyle = idx === 0 ? (isSpikeLocked ? '#00E5FF' : hudMainColor) : 'rgba(165, 243, 252, 0.7)';
             ctx.arc(spike.x, spike.y, 1.5, 0, Math.PI * 2);
             ctx.fill();
 
@@ -1955,14 +1955,14 @@ export default function ImageSandbox() {
             // Draw a small semi-transparent black backing card to guarantee text visibility over noise grid lines
             ctx.fillStyle = 'rgba(5, 7, 12, 0.85)';
             ctx.strokeStyle = idx === 0 
-              ? (isSpikeLocked ? 'rgba(74, 222, 128, 0.6)' : 'rgba(203, 242, 76, 0.6)') 
+              ? (isSpikeLocked ? 'rgba(74, 222, 128, 0.6)' : 'rgba(0, 229, 255, 0.6)') 
               : 'rgba(255, 255, 255, 0.15)';
             ctx.lineWidth = 0.5;
             ctx.fillRect(tagX - 1.5, tagY - 4, tagW, 8);
             ctx.strokeRect(tagX - 1.5, tagY - 4, tagW, 8);
 
             ctx.fillStyle = idx === 0 
-              ? (isSpikeLocked ? '#CBF24C' : (isHighContrast ? '#ffffff' : '#CBF24C')) 
+              ? (isSpikeLocked ? '#00E5FF' : (isHighContrast ? '#ffffff' : '#00E5FF')) 
               : 'rgba(165, 243, 252, 0.9)';
             ctx.fillText(labelText, tagX, tagY);
           });
@@ -1984,7 +1984,7 @@ export default function ImageSandbox() {
           ctx.fillText(infoStr, labelX, labelY);
 
           if (isLocked) {
-            ctx.fillStyle = '#CBF24C'; // target-locked green color
+            ctx.fillStyle = '#00E5FF'; // target-locked green color
             ctx.font = 'bold 7px monospace';
             ctx.fillText('● CARRIER LOCK', labelX, labelY + 9);
           }
@@ -2134,7 +2134,7 @@ export default function ImageSandbox() {
               onClick={() => setIsWatermarked(!isWatermarked)}
               className={`text-xs px-2 py-1 rounded font-bold transition ${
                 isWatermarked 
-                  ? 'bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 shadow-[0_0_8px_rgba(203,242,76,0.2)]' 
+                  ? 'bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 shadow-[0_0_8px_rgba(0,229,255,0.2)]' 
                   : 'bg-white/5 border border-white/10 text-white/50'
               }`}
             >
@@ -2177,7 +2177,7 @@ export default function ImageSandbox() {
                   onClick={() => setWatermarkChannel(ch)}
                   className={`text-[9.5px] font-mono py-1 rounded transition border cursor-pointer disabled:opacity-30 ${
                     watermarkChannel === ch
-                      ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300 font-bold shadow-[0_0_6px_rgba(203,242,76,0.15)]'
+                      ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-300 font-bold shadow-[0_0_6px_rgba(0,229,255,0.15)]'
                       : 'bg-black/20 border-white/5 text-white/40 hover:text-white/70'
                   }`}
                 >
@@ -2226,7 +2226,7 @@ export default function ImageSandbox() {
               onClick={() => setViewMode('sideBySide')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
                 viewMode === 'sideBySide' 
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(203,242,76,0.2)]' 
+                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(0,229,255,0.2)]' 
                   : 'text-white/60 hover:text-white'
               }`}
             >
@@ -2238,7 +2238,7 @@ export default function ImageSandbox() {
               onClick={() => setViewMode('pattern')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
                 viewMode === 'pattern' 
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(203,242,76,0.2)]' 
+                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(0,229,255,0.2)]' 
                   : 'text-white/60 hover:text-white'
               }`}
             >
@@ -2250,7 +2250,7 @@ export default function ImageSandbox() {
               onClick={() => setViewMode('fft')}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
                 viewMode === 'fft' 
-                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(203,242,76,0.2)]' 
+                  ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(0,229,255,0.2)]' 
                   : 'text-white/60 hover:text-white'
               }`}
             >
@@ -2294,7 +2294,7 @@ export default function ImageSandbox() {
                     type="button"
                     className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
                       comparisonType === 'grid' 
-                        ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(203,242,76,0.2)]' 
+                        ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(0,229,255,0.2)]' 
                         : 'text-white/40 hover:text-white/70'
                     }`}
                   >
@@ -2306,7 +2306,7 @@ export default function ImageSandbox() {
                     type="button"
                     className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer flex items-center gap-1.5 ${
                       comparisonType === 'slider' 
-                        ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(203,242,76,0.2)]' 
+                        ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_8px_rgba(0,229,255,0.2)]' 
                         : 'text-white/40 hover:text-white/70'
                     }`}
                   >
@@ -2401,11 +2401,11 @@ export default function ImageSandbox() {
 
                       {/* Vertical Divider Slider Line */}
                       <div 
-                        className="absolute top-0 bottom-0 w-0.5 bg-cyan-400/80 shadow-[0_0_10px_rgba(203,242,76,0.5)] flex items-center justify-center pointer-events-none"
+                        className="absolute top-0 bottom-0 w-0.5 bg-cyan-400/80 shadow-[0_0_10px_rgba(0,229,255,0.5)] flex items-center justify-center pointer-events-none"
                         style={{ left: `${sliderPosition}%` }}
                       >
                         {/* Interactive Handle Knob */}
-                        <div className="w-8 h-8 rounded-full bg-[#0a0d14] border-2 border-cyan-400 text-cyan-300 flex items-center justify-center shadow-[0_0_15px_rgba(203,242,76,0.4)] group-hover:scale-110 active:scale-125 transition-transform text-[10px] font-bold select-none">
+                        <div className="w-8 h-8 rounded-full bg-[#0a0d14] border-2 border-cyan-400 text-cyan-300 flex items-center justify-center shadow-[0_0_15px_rgba(0,229,255,0.4)] group-hover:scale-110 active:scale-125 transition-transform text-[10px] font-bold select-none">
                           ↔
                         </div>
                       </div>
@@ -2622,7 +2622,7 @@ export default function ImageSandbox() {
                           className={`absolute pointer-events-none bg-black/95 border rounded-lg p-2.5 z-30 flex flex-col gap-0.5 text-left text-[9px] font-mono min-w-[130px] ${
                             fftHighContrast 
                               ? 'border-white/80 shadow-[0_4px_16px_rgba(255,255,255,0.25)] text-white' 
-                              : 'border-cyan-400/60 shadow-[0_4px_16px_rgba(203,242,76,0.3)] text-cyan-300'
+                              : 'border-cyan-400/60 shadow-[0_4px_16px_rgba(0,229,255,0.3)] text-cyan-300'
                           }`}
                           style={{
                             left: `${Math.max(68, Math.min(160 - 68, fftPeak.x))}px`,
@@ -2761,8 +2761,8 @@ export default function ImageSandbox() {
                       <svg className="w-full h-full p-2 block overflow-visible select-none">
                         <defs>
                           <linearGradient id="driftGrad" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#CBF24C" stopOpacity="0.3" />
-                            <stop offset="100%" stopColor="#CBF24C" stopOpacity="0.0" />
+                            <stop offset="0%" stopColor="#00E5FF" stopOpacity="0.3" />
+                            <stop offset="100%" stopColor="#00E5FF" stopOpacity="0.0" />
                           </linearGradient>
                         </defs>
 
@@ -2807,7 +2807,7 @@ export default function ImageSandbox() {
                         {/* Radius sparkline trace */}
                         <polyline
                           fill="none"
-                          stroke="#CBF24C"
+                          stroke="#00E5FF"
                           strokeWidth="1.8"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -2832,7 +2832,7 @@ export default function ImageSandbox() {
                                   cx={x} 
                                   cy={y} 
                                   r={isLast ? "4" : "2"} 
-                                  fill={isLast ? "#FF4A2E" : "#CBF24C"} 
+                                  fill={isLast ? "#FF4A2E" : "#00E5FF"} 
                                   className={isLast ? "animate-pulse" : ""} 
                                 />
                                 <circle cx={x} cy={y} r={isLast ? "1.5" : "0.8"} fill="#ffffff" />
@@ -2840,7 +2840,7 @@ export default function ImageSandbox() {
                                   <text 
                                     x={x - 12} 
                                     y={y - 8} 
-                                    fill="#CBF24C" 
+                                    fill="#00E5FF" 
                                     className="text-[7.5px] font-mono font-bold select-none drop-shadow-md"
                                   >
                                     Live R:{pt.radius}px
@@ -2901,7 +2901,7 @@ export default function ImageSandbox() {
                         type="button"
                         className={`text-[9px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
                           peakPersistence 
-                            ? 'bg-cyan-500 text-black border-cyan-400 shadow-[0_0_10px_rgba(203,242,76,0.4)] font-black animate-pulse' 
+                            ? 'bg-cyan-500 text-black border-cyan-400 shadow-[0_0_10px_rgba(0,229,255,0.4)] font-black animate-pulse' 
                             : 'bg-white/10 border border-white/10 text-cyan-300 hover:text-white hover:bg-white/20'
                         }`}
                       >
@@ -3059,7 +3059,7 @@ export default function ImageSandbox() {
                           onClick={() => setFftIntensityMap(mode)}
                           className={`flex-1 text-[7.5px] font-bold uppercase py-1 px-0.5 rounded transition-all cursor-pointer text-center ${
                             fftIntensityMap === mode
-                              ? 'bg-cyan-500 text-black shadow-[0_0_8px_rgba(203,242,76,0.4)] font-extrabold'
+                              ? 'bg-cyan-500 text-black shadow-[0_0_8px_rgba(0,229,255,0.4)] font-extrabold'
                               : 'text-white/60 hover:text-white hover:bg-white/5'
                           }`}
                         >
@@ -3144,7 +3144,7 @@ export default function ImageSandbox() {
                         onClick={() => setActiveLegendHighlight(prev => prev === 'peak' ? null : 'peak')}
                         className={`flex flex-col text-left p-2 rounded-xl transition cursor-pointer select-none border ${
                           activeLegendHighlight === 'peak'
-                            ? 'bg-cyan-500/10 border-cyan-400/50 shadow-[0_0_8px_rgba(203,242,76,0.15)] text-white'
+                            ? 'bg-cyan-500/10 border-cyan-400/50 shadow-[0_0_8px_rgba(0,229,255,0.15)] text-white'
                             : 'bg-white/5 border-transparent hover:border-white/10 text-white/70 hover:text-white hover:bg-white/10'
                         }`}
                         title="Interact to isolate peak locking indicators"
@@ -3173,7 +3173,7 @@ export default function ImageSandbox() {
                         onClick={() => setActiveLegendHighlight(prev => prev === 'zone' ? null : 'zone')}
                         className={`flex flex-col text-left p-2 rounded-xl transition cursor-pointer select-none border ${
                           activeLegendHighlight === 'zone'
-                            ? 'bg-cyan-500/10 border-cyan-400/50 shadow-[0_0_8px_rgba(203,242,76,0.15)] text-white'
+                            ? 'bg-cyan-500/10 border-cyan-400/50 shadow-[0_0_8px_rgba(0,229,255,0.15)] text-white'
                             : 'bg-white/5 border-transparent hover:border-white/10 text-white/70 hover:text-white hover:bg-white/10'
                         }`}
                         title="Interact to illuminate concentric grid rings and radial units"
@@ -3231,7 +3231,7 @@ export default function ImageSandbox() {
                       <button
                         onClick={() => exportFftPeakData('csv')}
                         disabled={!fftPeak && !fftPeakRef.current}
-                        className="bg-cyan-500/10 hover:bg-cyan-500/15 disabled:opacity-40 select-none border border-cyan-500/20 hover:border-cyan-500/45 text-cyan-300 disabled:pointer-events-none font-semibold px-2.5 py-1.5 rounded-lg text-[9px] font-mono transition flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_0_8px_rgba(203,242,76,0.1)]"
+                        className="bg-cyan-500/10 hover:bg-cyan-500/15 disabled:opacity-40 select-none border border-cyan-500/20 hover:border-cyan-500/45 text-cyan-300 disabled:pointer-events-none font-semibold px-2.5 py-1.5 rounded-lg text-[9px] font-mono transition flex items-center justify-center gap-1.5 cursor-pointer shadow-[0_0_8px_rgba(0,229,255,0.1)]"
                         title="Download F & R coordinates as CSV"
                       >
                         <Download className="w-3 h-3 text-cyan-400" />
@@ -3605,7 +3605,7 @@ export default function ImageSandbox() {
               onClick={() => setActiveBypass('none')}
               className={`flex items-center gap-2.5 p-2 rounded-lg border text-left transition cursor-pointer ${
                 activeBypass === 'none'
-                  ? 'bg-white/10 border-white/20 text-cyan-200 shadow-[0_0_8px_rgba(203,242,76,0.1)]'
+                  ? 'bg-white/10 border-white/20 text-cyan-200 shadow-[0_0_8px_rgba(0,229,255,0.1)]'
                   : 'bg-black/30 border-white/5 hover:border-white/10 text-white/60 hover:text-white'
               }`}
             >
@@ -3647,7 +3647,7 @@ export default function ImageSandbox() {
                     }}
                     className={`w-full flex gap-2.5 p-2.5 rounded-lg border text-left items-start transition cursor-pointer ${
                       activeBypass === m.id
-                        ? 'bg-white/10 border-cyan-500/40 text-cyan-100 shadow-[0_0_8px_rgba(203,242,76,0.15)]'
+                        ? 'bg-white/10 border-cyan-500/40 text-cyan-100 shadow-[0_0_8px_rgba(0,229,255,0.15)]'
                         : 'bg-black/30 border-white/5 hover:border-white/10 text-white/60 hover:text-white'
                     }`}
                   >

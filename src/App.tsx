@@ -111,7 +111,7 @@ export default function App() {
                   onClick={() => setActiveTab(t.id)}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none cursor-pointer transition whitespace-nowrap ${
                     active
-                      ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(203,242,76,0.25)]'
+                      ? 'bg-white/10 border border-white/20 text-cyan-300 shadow-[0_0_12px_rgba(0,229,255,0.25)]'
                       : 'text-white/60 hover:text-white'
                   }`}
                 >
@@ -264,7 +264,7 @@ export default function App() {
                       onClick={() => setActiveBgTopic(t.id)}
                       className={`p-3 text-left rounded-xl border transition flex items-center justify-between gap-3 cursor-pointer ${
                         activeBgTopic === t.id
-                          ? 'bg-white/10 border-cyan-500/40 text-cyan-300 shadow-[0_0_12px_rgba(203,242,76,0.15)]'
+                          ? 'bg-white/10 border-cyan-500/40 text-cyan-300 shadow-[0_0_12px_rgba(0,229,255,0.15)]'
                           : 'bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/20 text-white/60'
                       }`}
                     >

@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw
 
 INK = (13, 15, 19)
 PAPER = (243, 239, 230)
-SIGNAL = (203, 242, 76)
+SIGNAL = (0, 229, 255)
 ATTACK = (255, 74, 46)
 FAINT = tuple(round(p * 0.45 + i * 0.55) for p, i in zip(PAPER, INK))  # paper @45% over ink
 

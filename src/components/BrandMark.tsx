@@ -1,11 +1,12 @@
 /**
  * The Signal Seal — brand mark for the Watermark Stress Test.
- * Detection rings (signal degrading outward), a lime survived-core, and a red
- * attack node. Rings inherit `currentColor`; core/node are fixed brand accents.
+ * Aqua core = the C2PA signature, holding. Dashed rings = the fragile hidden
+ * watermark degrading outward. Red node = the edit that breaks it.
+ * Rings inherit `currentColor`; core/node are fixed brand accents.
  */
 export default function BrandMark({
   className = 'w-8 h-8',
-  core = '#CBF24C',
+  core = '#00E5FF',
 }: { className?: string; core?: string }) {
   return (
     <svg viewBox="0 0 120 120" className={className} fill="none" aria-hidden="true">
