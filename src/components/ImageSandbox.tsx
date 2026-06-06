@@ -3287,6 +3287,179 @@ export default function ImageSandbox() {
             )}
           </AnimatePresence>
         </div>
+
+        {/* Physical Spatial Distortions — relocated under the viewport (middle column) */}
+        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 flex flex-col gap-4 shadow-xl">
+          <div className="flex items-center gap-2">
+            <Sliders className="w-5 h-5 text-indigo-400 animate-pulse" />
+            <h3 className="text-sm font-semibold tracking-wide uppercase text-white/90">
+              Step 4: Spatial Distortions
+            </h3>
+          </div>
+          <p className="text-xs text-white/55 leading-relaxed">
+            Layer standard signal perturbations directly on the pixel matrix and watch the carrier degrade in the viewport above.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 font-mono text-[10px] bg-black/30 p-3 rounded-xl border border-white/5">
+            {/* 1. Crop slider */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Crop Margin:</span>
+                <span className="text-indigo-300 font-bold">{cropPercent}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="45"
+                step="5"
+                value={cropPercent}
+                onChange={(e) => setCropPercent(parseInt(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 2. JPEG Compression Quality Slider */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>JPEG Quality:</span>
+                <span className="text-indigo-300 font-bold">{jpegQuality}%</span>
+              </div>
+              <input
+                type="range"
+                min="10"
+                max="100"
+                step="5"
+                value={jpegQuality}
+                onChange={(e) => setJpegQuality(parseInt(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 3. Median Size selection */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Median Filter:</span>
+                <span className="text-indigo-300 font-bold">{medianSize === 1 ? 'Off' : `${medianSize}x${medianSize}`}</span>
+              </div>
+              <div className="grid grid-cols-3 gap-1 mt-1 font-mono text-[9px]">
+                {[1, 3, 5].map((sz) => (
+                  <button
+                    key={sz}
+                    onClick={() => setMedianSize(sz)}
+                    className={`py-0.5 rounded border transition cursor-pointer ${
+                      medianSize === sz
+                        ? 'bg-indigo-500/15 border-indigo-500/40 text-indigo-200'
+                        : 'bg-black/20 border-white/5 text-white/40 hover:text-white/70'
+                    }`}
+                  >
+                    {sz === 1 ? 'OFF' : `${sz}x${sz}`}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* 4. Blur Radius slider */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Gaussian Blur:</span>
+                <span className="text-indigo-300 font-bold">{blurRadius.toFixed(1)}px</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="4"
+                step="0.5"
+                value={blurRadius}
+                onChange={(e) => setBlurRadius(parseFloat(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 5. Brightness Offset slider */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Brightness Offset:</span>
+                <span className="text-indigo-300 font-bold">{brightnessOffset > 0 ? `+${brightnessOffset}` : brightnessOffset}</span>
+              </div>
+              <input
+                type="range"
+                min="-50"
+                max="50"
+                step="5"
+                value={brightnessOffset}
+                onChange={(e) => setBrightnessOffset(parseInt(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 6. Salt Pepper Noise Slider */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Salt & Pepper Noise:</span>
+                <span className="text-indigo-300 font-bold">{saltPepperFrac}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="8"
+                step="1"
+                value={saltPepperFrac}
+                onChange={(e) => setSaltPepperFrac(parseInt(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 7. Gamma selection */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Gamma Correction:</span>
+                <span className="text-indigo-300 font-bold">{gammaVal.toFixed(2)}</span>
+              </div>
+              <input
+                type="range"
+                min="0.5"
+                max="1.8"
+                step="0.1"
+                value={gammaVal}
+                onChange={(e) => setGammaVal(parseFloat(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+
+            {/* 8. Shear Angle Selection */}
+            <div className="space-y-1">
+              <div className="flex justify-between text-white/75">
+                <span>Shear & Rotation:</span>
+                <span className="text-indigo-300 font-bold">{shearAngle}°</span>
+              </div>
+              <input
+                type="range"
+                min="-15"
+                max="15"
+                step="3"
+                value={shearAngle}
+                onChange={(e) => setShearAngle(parseInt(e.target.value))}
+                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              setCropPercent(0);
+              setJpegQuality(100);
+              setMedianSize(1);
+              setBlurRadius(0);
+              setBrightnessOffset(0);
+              setSaltPepperFrac(0);
+              setGammaVal(1.0);
+              setShearAngle(0);
+            }}
+            className="w-full text-[10px] font-bold py-1.5 border border-dashed border-white/10 hover:border-white/20 hover:bg-white/5 rounded-lg text-white/50 hover:text-white/80 transition cursor-pointer text-center font-mono"
+          >
+            Clear Spatial Distortions
+          </button>
+        </div>
       </div>
 
       {/* 3. Right Column: Perturbations & Detection Scanner */}
@@ -3526,179 +3699,6 @@ export default function ImageSandbox() {
               </p>
             </motion.div>
           )}
-        </div>
-
-        {/* Physical Spatial Distortions (8-Layer Real-World Attack Cascade) */}
-        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 flex flex-col gap-4 shadow-xl">
-          <div className="flex items-center gap-2">
-            <Sliders className="w-5 h-5 text-indigo-400 animate-pulse" />
-            <h3 className="text-sm font-semibold tracking-wide uppercase text-white/90">
-              Step 4: Spatial Distortions
-            </h3>
-          </div>
-          <p className="text-xs text-white/55 leading-relaxed">
-            Layer standard signal perturbations directly on standard pixel matrices. Test stego carrier degradation.
-          </p>
-
-          <div className="space-y-3 font-mono text-[10px] bg-black/30 p-3 rounded-xl border border-white/5">
-            {/* 1. Crop slider */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Crop Margin:</span>
-                <span className="text-indigo-300 font-bold">{cropPercent}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="45"
-                step="5"
-                value={cropPercent}
-                onChange={(e) => setCropPercent(parseInt(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-
-            {/* 2. JPEG Compression Quality Slider */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>JPEG Quality:</span>
-                <span className="text-indigo-300 font-bold">{jpegQuality}%</span>
-              </div>
-              <input
-                type="range"
-                min="10"
-                max="100"
-                step="5"
-                value={jpegQuality}
-                onChange={(e) => setJpegQuality(parseInt(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-
-            {/* 3. Median Size selection */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Median Filter:</span>
-                <span className="text-indigo-300 font-bold">{medianSize === 1 ? 'Off' : `${medianSize}x${medianSize}`}</span>
-              </div>
-              <div className="grid grid-cols-3 gap-1 mt-1 font-mono text-[9px]">
-                {[1, 3, 5].map((sz) => (
-                  <button
-                    key={sz}
-                    onClick={() => setMedianSize(sz)}
-                    className={`py-0.5 rounded border transition cursor-pointer ${
-                      medianSize === sz
-                        ? 'bg-indigo-500/15 border-indigo-500/40 text-indigo-200'
-                        : 'bg-black/20 border-white/5 text-white/40 hover:text-white/70'
-                    }`}
-                  >
-                    {sz === 1 ? 'OFF' : `${sz}x${sz}`}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* 4. Blur Radius slider */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Gaussian Blur:</span>
-                <span className="text-indigo-300 font-bold">{blurRadius.toFixed(1)}px</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="4"
-                step="0.5"
-                value={blurRadius}
-                onChange={(e) => setBlurRadius(parseFloat(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-
-            {/* 5. Brightness Offset slider */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Brightness Offset:</span>
-                <span className="text-indigo-300 font-bold">{brightnessOffset > 0 ? `+${brightnessOffset}` : brightnessOffset}</span>
-              </div>
-              <input
-                type="range"
-                min="-50"
-                max="50"
-                step="5"
-                value={brightnessOffset}
-                onChange={(e) => setBrightnessOffset(parseInt(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-
-            {/* 6. Salt Pepper Noise Slider */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Salt & Pepper Noise:</span>
-                <span className="text-indigo-300 font-bold">{saltPepperFrac}%</span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="8"
-                step="1"
-                value={saltPepperFrac}
-                onChange={(e) => setSaltPepperFrac(parseInt(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-
-            {/* 7. Gamma selection */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Gamma Correction:</span>
-                <span className="text-indigo-300 font-bold">{gammaVal.toFixed(2)}</span>
-              </div>
-              <input
-                type="range"
-                min="0.5"
-                max="1.8"
-                step="0.1"
-                value={gammaVal}
-                onChange={(e) => setGammaVal(parseFloat(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-
-            {/* 8. Shear Angle Selection */}
-            <div className="space-y-1">
-              <div className="flex justify-between text-white/75">
-                <span>Shear & Rotation:</span>
-                <span className="text-indigo-300 font-bold">{shearAngle}°</span>
-              </div>
-              <input
-                type="range"
-                min="-15"
-                max="15"
-                step="3"
-                value={shearAngle}
-                onChange={(e) => setShearAngle(parseInt(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded appearance-none accent-indigo-400 cursor-pointer"
-              />
-            </div>
-          </div>
-
-          <button
-            onClick={() => {
-              setCropPercent(0);
-              setJpegQuality(100);
-              setMedianSize(1);
-              setBlurRadius(0);
-              setBrightnessOffset(0);
-              setSaltPepperFrac(0);
-              setGammaVal(1.0);
-              setShearAngle(0);
-            }}
-            className="w-full text-[10px] font-bold py-1.5 border border-dashed border-white/10 hover:border-white/20 hover:bg-white/5 rounded-lg text-white/50 hover:text-white/80 transition cursor-pointer text-center font-mono"
-          >
-            Clear Spatial Distortions
-          </button>
         </div>
       </div>
 
