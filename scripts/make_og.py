@@ -1,4 +1,4 @@
-"""Generate the Open Graph cover (1200x630) for the Watermark Robustness Lab.
+"""Generate the Open Graph cover (1200x630) for the Watermark Stress Test.
 
 Brand-consistent with the app: near-black background, cyan->blue accent,
 a faint concentric-ring 'carrier' motif (the thing the lab is about), and a
@@ -53,7 +53,7 @@ def font(sz, bold=True):
 PAD = 72
 
 # --- eyebrow / badge ---
-badge = "EDUCATIONAL · PROVENANCE ROBUSTNESS"
+badge = "EDUCATIONAL · CONTENT PROVENANCE"
 bf = font(22)
 d.rounded_rectangle([PAD, 84, PAD + d.textlength(badge, font=bf) + 40, 84 + 42],
                     radius=10, fill=(34, 211, 238, 28), outline=(34, 211, 238, 120), width=1)
@@ -62,8 +62,7 @@ d.text((PAD + 20, 94), badge, font=bf, fill=CYAN)
 # --- title (two lines) ---
 tf = font(76)
 d.text((PAD, 168), "Watermark", font=tf, fill=WHITE)
-d.text((PAD + d.textlength("Watermark ", font=tf), 168), "Robustness", font=tf, fill=CYAN)
-d.text((PAD, 256), "Lab", font=tf, fill=WHITE)
+d.text((PAD, 256), "Stress Test", font=tf, fill=CYAN)
 
 # --- subtitle ---
 sf = font(31, bold=False)

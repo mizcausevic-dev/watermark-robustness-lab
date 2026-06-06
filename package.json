@@ -1,5 +1,5 @@
 {
-  "name": "watermark-robustness-lab",
+  "name": "watermark-stress-test",
   "version": "0.1.0",
   "private": true,
   "description": "Interactive teaching lab on the fragility of AI content watermarks (pixel & token steganography) and the case for cryptographic content provenance (C2PA / Content Credentials).",

@@ -3730,7 +3730,7 @@ export default function ImageSandbox() {
                 <div className="flex items-center gap-2">
                   <Table className="w-5 h-5 text-indigo-400" />
                   <h3 className="text-lg font-bold uppercase tracking-wider text-white">
-                    Batch Robustness Lab
+                    Batch Stress Test
                   </h3>
                 </div>
                 <p className="text-xs text-white/50 leading-relaxed">

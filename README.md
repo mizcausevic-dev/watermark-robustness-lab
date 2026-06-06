@@ -1,4 +1,4 @@
-# Watermark Robustness Lab
+# Watermark Stress Test
 
 **An interactive teaching lab on why hidden AI-content watermarks are fragile — and why durable provenance needs cryptographic Content Credentials (C2PA).**
 
@@ -61,6 +61,16 @@ This is an AI-safety / provenance-education artifact. It demonstrates robustness
 self-authored synthetic signal to argue for stronger provenance. It is **not** a tool for removing
 real-world watermarks or laundering AI-generated content. See the in-app *Responsible Use & Scope*
 briefing for the full statement.
+
+## Related work
+
+This project concerns **content provenance** watermarking — marks embedded in generated media
+(the SynthID family). It is independent of, and not derived from, the
+[Watermark-Robustness-Toolbox (WRT)](https://github.com/dnn-security/Watermark-Robustness-Toolbox)
+by Lukas, Jiang, Li & Kerschbaum, which benchmarks the robustness of **DNN model-weight** watermarks
+(used to prove ownership of trained neural networks) — a distinct subfield, in Python/PyTorch under
+GPL-3.0. See their IEEE S&P 2022 paper, *"SoK: How Robust is Deep Neural Network Image Classification
+Watermarking?"*. Different domain, different stack, no shared code.
 
 ## License
 

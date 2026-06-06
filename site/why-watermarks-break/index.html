@@ -60,7 +60,7 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Watermark Robustness Lab", "item": "https://provenance-lab.kineticgain.com/" },
+    { "@type": "ListItem", "position": 1, "name": "Watermark Stress Test", "item": "https://provenance-lab.kineticgain.com/" },
     { "@type": "ListItem", "position": 2, "name": "Why watermarks break", "item": "https://provenance-lab.kineticgain.com/why-watermarks-break/" }
   ]
 }
@@ -119,7 +119,7 @@
 
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="/"><span class="dot"></span> Watermark Robustness Lab</a>
+    <a class="brand" href="/"><span class="dot"></span> Watermark Stress Test</a>
     <nav class="nav">
       <a href="/">Open the lab</a>
       <a href="https://kineticgain.com/" target="_blank" rel="noreferrer">Kinetic Gain</a>
@@ -150,7 +150,7 @@
   <p>This piece explains the mechanism in plain terms, shows the four edit classes that attenuate it, and argues for the layer that doesn't share the weakness — cryptographically signed provenance, standardised as <a href="https://c2pa.org/" target="_blank" rel="noreferrer">C2PA</a> and shipped to users as <a href="https://contentcredentials.org/" target="_blank" rel="noreferrer">Content Credentials</a>.</p>
 
   <div class="callout scope">
-    <strong>Scope note.</strong> The companion <a href="/">Watermark Robustness Lab</a> demonstrates these effects on a <em>synthetic</em> watermark it injects itself, entirely in your browser. It does not detect or remove SynthID or any production system. The goal is to teach the robustness lesson, not to defeat anyone's watermark.
+    <strong>Scope note.</strong> The companion <a href="/">Watermark Stress Test</a> demonstrates these effects on a <em>synthetic</em> watermark it injects itself, entirely in your browser. It does not detect or remove SynthID or any production system. The goal is to teach the robustness lesson, not to defeat anyone's watermark.
   </div>
 
   <h2>How content watermarking works</h2>
@@ -207,7 +207,7 @@
   <p>Reading that watermarks are fragile is one thing; watching a detection gauge fall to zero under a notch filter you control is another. The lab lets you inject a synthetic carrier, see it in the FFT, and attenuate it with real signal-processing filters — plus a text sandbox that resets a Z-score with synonym and character edits.</p>
 
   <div class="cta">
-    <a class="btn primary" href="/">Open the Watermark Robustness Lab →</a>
+    <a class="btn primary" href="/">Open the Watermark Stress Test →</a>
     <a class="btn ghost" href="https://kineticgain.com/trust/" target="_blank" rel="noreferrer">Kinetic Gain Trust Pack</a>
   </div>
 
@@ -221,6 +221,9 @@
     <p>No. It operates only on a synthetic watermark it injects itself, in your browser. The robustness point is general: in-band watermarks can be attenuated by ordinary editing, which is why provenance shouldn't depend on them alone.</p>
   </div>
 
+  <h2>Related work</h2>
+  <p>This project concerns <strong>content provenance</strong> watermarking — marks embedded in generated media (the SynthID family). It is independent of, and not derived from, the <a href="https://github.com/dnn-security/Watermark-Robustness-Toolbox" target="_blank" rel="noreferrer">Watermark-Robustness-Toolbox (WRT)</a> by Lukas, Jiang, Li &amp; Kerschbaum, which benchmarks the robustness of <em>DNN model-weight</em> watermarks — used to prove ownership of trained neural networks, a distinct subfield. See their IEEE S&amp;P 2022 paper, <em>"SoK: How Robust is Deep Neural Network Image Classification Watermarking?"</em> Different domain, different stack, no shared code.</p>
+
 </article>
 </div>
 
@@ -231,7 +234,7 @@
       <a href="/">The lab</a>
       <a href="https://contentcredentials.org/" target="_blank" rel="noreferrer">C2PA</a>
       <a href="https://www.linkedin.com/in/mirzacausevic" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a href="https://github.com/mizcausevic-dev/watermark-robustness-lab" target="_blank" rel="noreferrer">Source</a>
+      <a href="https://github.com/mizcausevic-dev/watermark-stress-test" target="_blank" rel="noreferrer">Source</a>
     </div>
   </div>
 </footer>

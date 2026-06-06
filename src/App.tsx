@@ -30,7 +30,7 @@ const KG_URL = 'https://kineticgain.com/';
 const TRUST_URL = 'https://kineticgain.com/trust/';
 const C2PA_URL = 'https://contentcredentials.org/';
 const LINKEDIN_URL = 'https://www.linkedin.com/in/mirzacausevic';
-const REPO_URL = 'https://github.com/mizcausevic-dev/watermark-robustness-lab';
+const REPO_URL = 'https://github.com/mizcausevic-dev/watermark-stress-test';
 const ARTICLE_URL = '/why-watermarks-break/';
 
 export default function App() {
@@ -56,14 +56,14 @@ export default function App() {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-sm sm:text-base font-bold tracking-tight text-white/90">
-                  Watermark <span className="text-cyan-400">Robustness Lab</span>
+                  Watermark <span className="text-cyan-400">Stress Test</span>
                 </h1>
                 <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-mono uppercase tracking-widest hidden sm:inline-block">
                   Educational
                 </span>
               </div>
               <div className="text-[10px] text-white/40 font-mono leading-none mt-0.5 hidden sm:block">
-                Provenance robustness · Kinetic Gain
+                Content provenance · Kinetic Gain
               </div>
             </div>
           </div>
@@ -326,7 +326,7 @@ export default function App() {
             <div className="flex flex-col gap-1.5 max-w-md">
               <div className="flex items-center gap-2 text-white/80 text-xs font-bold">
                 <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                Watermark Robustness Lab
+                Watermark Stress Test
               </div>
               <p className="text-[11px] text-white/45 leading-relaxed">
                 Built by <span className="text-white/70 font-semibold">Miz Causevic</span> — Boston Enterprise Technologist.
