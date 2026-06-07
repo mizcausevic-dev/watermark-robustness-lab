@@ -11,6 +11,7 @@ import {
   Sliders
 } from 'lucide-react';
 import { InfoTip } from './Tooltip';
+import { GlossaryTerm } from './GlossaryTerm';
 
 type Sample = { id: string; label: string; text: string; rephrased: string };
 
@@ -406,7 +407,7 @@ export default function TextBypassSandbox() {
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 shadow-xl flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Binary className="w-5 h-5 text-cyan-400" />
-              <h3 className="text-sm font-bold uppercase tracking-wide text-white/95">Stego Z-Score Metric</h3>
+              <h3 className="text-sm font-bold uppercase tracking-wide text-white/95">Stego <GlossaryTerm id="z-score" side="bottom">Z-Score</GlossaryTerm> Metric</h3>
             </div>
 
             <div className="bg-black/40 border border-white/10 rounded-xl p-4 flex flex-col items-center gap-2 text-center">
@@ -425,7 +426,7 @@ export default function TextBypassSandbox() {
                 {isBypassed ? (
                   <span>Z-score is <strong className="text-emerald-400">&lt; 1.96</strong>. The token distribution fits normal human writing statistics. No detection.</span>
                 ) : (
-                  <span>Z-score is <strong className="text-red-400">&gt; 1.96</strong>. Improbably high count of favored words — a statistical detector flags this as AI-marked.</span>
+                  <span>Z-score is <strong className="text-red-400">&gt; 1.96</strong>. Improbably high count of <GlossaryTerm id="favored-tokens">favored words</GlossaryTerm> — a statistical detector flags this as AI-marked.</span>
                 )}
               </p>
 
@@ -458,7 +459,7 @@ export default function TextBypassSandbox() {
                 <span className="flex items-center">Favored Token Share:<InfoTip label="Share of words the watermark nudged the model to prefer. An improbably high share (vs a 50% baseline) is the statistical fingerprint." /></span>
                 <span className={isBypassed ? "text-white/70" : "text-emerald-400"}>{greenRatio}% (vs 50% baseline)</span>
               </div>
-              <div className="flex justify-between"><span>Preceding Context Hash N:</span><span className="text-white/70">4 tokens</span></div>
+              <div className="flex justify-between"><span>Preceding <GlossaryTerm id="context-hash">Context Hash</GlossaryTerm> N:</span><span className="text-white/70">4 tokens</span></div>
               <div className="flex justify-between"><span>Statistical Validation:</span><span className="text-white/70">Pearson Chi-Squared</span></div>
             </div>
           </div>
@@ -481,7 +482,7 @@ export default function TextBypassSandbox() {
             <Lightbulb className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
             <p className="text-[10px] text-white/55 leading-normal">
               <strong>Why did the Z-score drop?</strong> Token watermarks (the SynthID-for-Text family) are incredibly
-              fragile to character or synonym changes — altering spelling breaks the context-hash chain and resets the
+              fragile to <GlossaryTerm id="homoglyph">homoglyph</GlossaryTerm> or synonym changes — altering spelling breaks the context-hash chain and resets the
               favored/neutral sequence.
             </p>
           </div>

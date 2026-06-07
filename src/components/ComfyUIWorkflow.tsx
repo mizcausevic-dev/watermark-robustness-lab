@@ -10,6 +10,7 @@ import {
 } from '../utils/imageFilters';
 import { viridis } from '../utils/metrics';
 import { InfoTip } from './Tooltip';
+import { GlossaryTerm } from './GlossaryTerm';
 
 const SIZE = 144;
 
@@ -222,7 +223,7 @@ export default function ComfyUIWorkflow() {
               <InfoTip label="A real, in-browser pipeline. Run flows a watermarked image through each node and reports the actual carrier correlation after every stage." />
             </h3>
             <p className="text-[11px] text-white/55 mt-0.5 leading-snug">
-              The same edits, chained. Drag nodes, tune properties, then run — and watch the real detection score collapse stage by stage.
+              The same edits, chained — a <GlossaryTerm id="notch-filter">frequency notch</GlossaryTerm>, a <GlossaryTerm id="quantization">quantize bottleneck</GlossaryTerm>, then a <GlossaryTerm id="bilateral-denoise">bilateral denoise</GlossaryTerm>. Drag nodes, tune properties, then run — and watch the real detection score collapse stage by stage.
             </p>
           </div>
         </div>
@@ -352,7 +353,7 @@ export default function ComfyUIWorkflow() {
               </div>
             </div>
             <p className="text-[9px] text-white/40 leading-snug">
-              Mild edits attenuate but rarely <em>erase</em> a redundant carrier — a surviving score doesn&apos;t prove
+              Mild edits attenuate but rarely <em>erase</em> a redundant <GlossaryTerm id="carrier">carrier</GlossaryTerm> — a surviving score doesn&apos;t prove
               origin, and an absent one proves nothing. The case for signing provenance (C2PA).
             </p>
           </div>

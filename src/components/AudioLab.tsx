@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Music, Play, Waves, ShieldCheck, ShieldAlert } from 'lucide-react';
+import { GlossaryTerm } from './GlossaryTerm';
 
 const SR = 44100;
 const DUR = 1.5;
@@ -96,15 +97,15 @@ export default function AudioLab() {
           <div className="flex items-center gap-2"><Music className="w-5 h-5 text-cyan-400" />
             <h3 className="text-sm font-semibold tracking-wide uppercase text-white/90">Audio watermark</h3></div>
           <p className="text-xs text-white/55 leading-relaxed">
-            The same fragility applies to audio. We embed an inaudible high-frequency spread-spectrum carrier
-            (~16&nbsp;kHz) keyed by a secret chip sequence, then detect it by correlation. A routine low-pass — the
+            The same fragility applies to audio. We embed an inaudible high-frequency <GlossaryTerm id="spread-spectrum">spread-spectrum carrier</GlossaryTerm>
+            (~16&nbsp;kHz) keyed by a secret chip sequence, then detect it by correlation. A routine <GlossaryTerm id="low-pass">low-pass</GlossaryTerm> — the
             kind any re-encode or "enhance" step applies — strips it out. <strong className="text-white/75">Headphones recommended;
             the carrier is near the edge of hearing.</strong>
           </p>
           <div className="bg-black/30 border border-white/10 rounded-lg p-3 text-[10px] font-mono text-white/50 space-y-1">
-            <div className="flex justify-between"><span>Carrier</span><span className="text-white/70">{F_WM / 1000} kHz spread-spectrum</span></div>
+            <div className="flex justify-between"><span><GlossaryTerm id="carrier">Carrier</GlossaryTerm></span><span className="text-white/70">{F_WM / 1000} kHz spread-spectrum</span></div>
             <div className="flex justify-between"><span>Amplitude</span><span className="text-white/70">{WM_AMP} (imperceptible)</span></div>
-            <div className="flex justify-between"><span>Detector</span><span className="text-white/70">matched-filter correlation</span></div>
+            <div className="flex justify-between"><span>Detector</span><span className="text-white/70"><GlossaryTerm id="matched-filter">matched-filter</GlossaryTerm> correlation</span></div>
           </div>
         </div>
       </div>
