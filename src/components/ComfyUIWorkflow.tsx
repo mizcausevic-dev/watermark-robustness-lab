@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Network, Settings, Play, Activity, Sparkles, Gauge, ArrowRight, RotateCcw,
+  Network, Settings, Play, Activity, Sparkles, Gauge, ArrowRight, RotateCcw, Layers,
 } from 'lucide-react';
 import { INITIAL_COMFY_NODES, INITIAL_COMFY_EDGES } from '../data';
 import { ComfyNode, ComfyEdge } from '../types';
@@ -8,9 +8,30 @@ import {
   injectSynthIDWatermark, scanSynthIDWatermark, applyNotchFilter,
   applyVaeQuantization, applyNeuralDenoise,
 } from '../utils/imageFilters';
+import { viridis } from '../utils/metrics';
 import { InfoTip } from './Tooltip';
 
 const SIZE = 144;
+
+/** Per-pixel difference, auto-normalized to its own max so the *structure* of the
+ * (tiny, imperceptible) changes is visible regardless of magnitude. */
+function amplifiedDiff(base: ImageData, out: ImageData): ImageData {
+  const a = base.data, b = out.data, N = a.length;
+  const ds = new Float32Array(N >> 2);
+  let maxD = 1;
+  for (let i = 0, j = 0; i < N; i += 4, j++) {
+    const d = (Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2])) / 3;
+    ds[j] = d;
+    if (d > maxD) maxD = d;
+  }
+  const heat = new ImageData(base.width, base.height);
+  const o = heat.data;
+  for (let i = 0, j = 0; i < N; i += 4, j++) {
+    const [r, g, bl] = viridis(Math.min(1, (ds[j] / maxD) * 1.15));
+    o[i] = r; o[i + 1] = g; o[i + 2] = bl; o[i + 3] = 255;
+  }
+  return heat;
+}
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const NODE_TIP: Record<string, string> = {
@@ -33,9 +54,13 @@ export default function ComfyUIWorkflow() {
   const [isRunning, setIsRunning] = useState(false);
   const [runStage, setRunStage] = useState<string | null>(null);
   const [detection, setDetection] = useState<number | null>(null);
+  const [diffMode, setDiffMode] = useState(false);
 
   const workRef = useRef<HTMLCanvasElement | null>(null);
   const baseRef = useRef<ImageData | null>(null);
+  const cleanRef = useRef<ImageData | null>(null);
+  const outRef = useRef<ImageData | null>(null);
+  const diffRef = useRef(false);
   const inCanvasRef = useRef<HTMLCanvasElement>(null);
   const outCanvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -44,6 +69,25 @@ export default function ComfyUIWorkflow() {
     if (c) c.getContext('2d')!.putImageData(data, 0, 0);
   };
 
+  // Draw the output canvas as either the processed image or an amplified
+  // per-pixel difference vs. the input — so the (imperceptible) changes are visible.
+  const renderOut = (data: ImageData | null) => {
+    if (!data) return;
+    outRef.current = data;
+    const c = outCanvasRef.current;
+    if (!c) return;
+    const ctx = c.getContext('2d')!;
+    if (diffRef.current && cleanRef.current) {
+      // diff vs the pristine pre-watermark original → reveals the invisible carrier + any edits.
+      ctx.putImageData(amplifiedDiff(cleanRef.current, data), 0, 0);
+    } else {
+      ctx.putImageData(data, 0, 0);
+    }
+  };
+
+  // Re-render the output when the diff toggle flips.
+  useEffect(() => { diffRef.current = diffMode; renderOut(outRef.current); }, [diffMode]);
+
   // Load a real watermarked asset once (same-origin → no canvas taint).
   useEffect(() => {
     const work = document.createElement('canvas');
@@ -51,11 +95,12 @@ export default function ComfyUIWorkflow() {
     workRef.current = work;
     const wctx = work.getContext('2d')!;
     const finish = (base: ImageData) => {
+      cleanRef.current = base;
       const wm = wctx.createImageData(SIZE, SIZE);
       injectSynthIDWatermark(base, wm, 3.4);
       baseRef.current = wm;
       drawTo(inCanvasRef, wm);
-      drawTo(outCanvasRef, wm);
+      renderOut(wm);
       setDetection(scanSynthIDWatermark(wm, true));
     };
     const img = new Image();
@@ -72,7 +117,7 @@ export default function ComfyUIWorkflow() {
       wctx.fillStyle = g; wctx.fillRect(0, 0, SIZE, SIZE);
       finish(wctx.getImageData(0, 0, SIZE, SIZE));
     };
-    img.src = '/presets/gradient.jpg';
+    img.src = '/presets/cityscape.jpg';
   }, []);
 
   const numProp = (id: string, key: string, def: number): number => {
@@ -84,7 +129,7 @@ export default function ComfyUIWorkflow() {
     if (isRunning || !baseRef.current) return;
     setIsRunning(true);
     let cur = new ImageData(new Uint8ClampedArray(baseRef.current.data), SIZE, SIZE);
-    drawTo(outCanvasRef, cur);
+    renderOut(cur);
     let det = scanSynthIDWatermark(baseRef.current, true);
     setDetection(det);
     setLog([`[load] input watermarked · carrier correlation ${det}%`]);
@@ -101,7 +146,7 @@ export default function ComfyUIWorkflow() {
       const out = new ImageData(new Uint8ClampedArray(cur.data), SIZE, SIZE);
       st.run(cur, out);
       cur = out;
-      drawTo(outCanvasRef, cur);
+      renderOut(cur);
       det = scanSynthIDWatermark(cur, true);
       setDetection(det);
       setLog((p) => [...p, `[${st.label}] carrier correlation → ${det}%`]);
@@ -269,8 +314,19 @@ export default function ComfyUIWorkflow() {
 
           {/* Live output */}
           <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-4 flex flex-col gap-3">
-            <div className="flex items-center gap-1.5 text-xs font-semibold text-white/90 uppercase tracking-wider font-mono">
-              <Gauge className="w-4 h-4 text-cyan-400" /> Live output
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-white/90 uppercase tracking-wider font-mono">
+                <Gauge className="w-4 h-4 text-cyan-400" /> Live output
+              </div>
+              <button
+                onClick={() => setDiffMode((d) => !d)}
+                className={`text-[9px] font-mono font-bold px-2 py-1 rounded border transition cursor-pointer flex items-center gap-1 ${
+                  diffMode ? 'bg-cyan-500/15 border-cyan-500/40 text-cyan-200' : 'bg-white/5 border-white/10 text-white/50 hover:text-white'
+                }`}
+                title="Amplify the per-pixel difference between input and output so the otherwise-invisible changes become visible."
+              >
+                <Layers className="w-3 h-3" /> {diffMode ? 'showing diff' : 'show diff'}
+              </button>
             </div>
             <div className="flex items-center justify-center gap-3">
               <div className="flex flex-col items-center gap-1">
@@ -282,7 +338,7 @@ export default function ComfyUIWorkflow() {
               <div className="flex flex-col items-center gap-1">
                 <canvas ref={outCanvasRef} width={SIZE} height={SIZE} role="img" aria-label="Pipeline output image"
                   className="w-[84px] h-[84px] rounded-lg border border-white/10 bg-black/40" />
-                <span className="text-[8px] font-mono text-white/40 uppercase">output</span>
+                <span className="text-[8px] font-mono text-white/40 uppercase">{diffMode ? 'diff (norm.)' : 'output'}</span>
               </div>
             </div>
             <div className="bg-black/40 border border-white/10 rounded-xl p-3 text-center">
