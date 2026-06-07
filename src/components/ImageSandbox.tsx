@@ -33,6 +33,7 @@ import {
   Pin
 } from 'lucide-react';
 import { IMAGE_PRESETS, BYPASS_METHODS } from '../data';
+import { GlossaryTerm } from './GlossaryTerm';
 import { BypassMethodId, DetectionResult } from '../types';
 import { 
   injectSynthIDWatermark, 
@@ -2143,7 +2144,7 @@ export default function ImageSandbox() {
           </div>
 
           <p className="text-xs text-white/55 leading-relaxed">
-            The lab injects a subtle steganographic carrier (the same <em>family</em> of technique systems like SynthID use). Toggle to see how an imperceptible ring carrier is layered into RGB values.
+            The lab injects a subtle <GlossaryTerm id="steganographic-watermark">steganographic carrier</GlossaryTerm> (the same <em>family</em> of technique systems like <GlossaryTerm id="synthid">SynthID</GlossaryTerm> use). Toggle to see how an imperceptible <GlossaryTerm id="carrier">ring carrier</GlossaryTerm> is layered into RGB values.
           </p>
 
           <div className="bg-black/40 border border-white/10 rounded-xl p-3 flex flex-col gap-3">
@@ -2448,7 +2449,7 @@ export default function ImageSandbox() {
                 <div className="text-[10px] font-mono text-white/50 max-w-sm leading-relaxed px-4">
                   {isWatermarked ? (
                     activeBypass === 'none' ? (
-                      <span className="text-cyan-400">✔ Carrier rings fully coherent — the kind of concentric band a keyed detector would correlate against.</span>
+                      <span className="text-cyan-400">✔ Carrier rings fully coherent — the kind of concentric band a <GlossaryTerm id="detection-confidence">keyed detector</GlossaryTerm> would correlate against.</span>
                     ) : (
                       <span className="text-pink-400">⚠ Perturbed/Bypassed: The concentric rings show extreme disruption, phase shifting, or complete signal loss.</span>
                     )
@@ -2650,7 +2651,7 @@ export default function ImageSandbox() {
                           </div>
 
                           <div className="flex justify-between gap-2.5">
-                            <span className="text-white/40">Frequency (F):</span>
+                            <span className="text-white/40"><GlossaryTerm id="fft">Frequency</GlossaryTerm> (F):</span>
                             <span className="text-white font-bold select-all">({Math.round(fftPeak.relX / fftZoom)}, {Math.round(fftPeak.relY / fftZoom)})</span>
                           </div>
 
