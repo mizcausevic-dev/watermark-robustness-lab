@@ -29,6 +29,8 @@ import ComfyUIWorkflow from './components/ComfyUIWorkflow';
 import CredentialShowdown from './components/CredentialShowdown';
 import AudioLab from './components/AudioLab';
 import AnalysisLab from './components/AnalysisLab';
+import Glossary from './components/Glossary';
+import { GlossaryTerm } from './components/GlossaryTerm';
 import { RESEARCH_BACKGROUNDS } from './data';
 
 type TabId = 'images' | 'text' | 'audio' | 'analysis' | 'showdown' | 'comfy' | 'research';
@@ -146,7 +148,7 @@ export default function App() {
             <strong className="text-amber-200">Educational simulation.</strong> This lab injects its own
             <em> synthetic</em> watermark and analyses it entirely in your browser. It does <strong>not</strong> detect,
             contain, or remove Google SynthID or any production watermark, and nothing you load is uploaded. The point is
-            to show <em>why</em> in-band watermarks are fragile — and why durable provenance needs cryptographic
+            to show <em>why</em> <GlossaryTerm id="in-band">in-band watermarks</GlossaryTerm> are fragile — and why durable provenance needs cryptographic
             {' '}<a href={C2PA_URL} target="_blank" rel="noreferrer" className="underline decoration-dotted hover:text-white">Content Credentials (C2PA)</a>.
           </p>
         </div>
@@ -160,10 +162,13 @@ export default function App() {
               Why hidden watermarks break — and what actually proves origin
             </h2>
             <p className="text-xs text-white/60 leading-relaxed">
-              Steganographic watermarks (the family systems like Google&apos;s SynthID belong to) hide a recoverable
-              signal in frequency coefficients or model latents. They survive casual edits, but a signal hidden
-              <em> inside</em> the pixels can be attenuated by edits that target where it lives — notch filtering,
-              denoising, re-encoding, rescaling, or paraphrasing. Use the labs to feel that fragility first-hand,
+              <GlossaryTerm id="steganographic-watermark">Steganographic watermarks</GlossaryTerm> (the family
+              systems like Google&apos;s <GlossaryTerm id="synthid">SynthID</GlossaryTerm> belong to) hide a recoverable
+              signal in frequency coefficients or <GlossaryTerm id="latents">model latents</GlossaryTerm>. They survive
+              casual edits, but a signal hidden <em>inside</em> the pixels can be attenuated by edits that target where
+              it lives — <GlossaryTerm id="notch-filter">notch filtering</GlossaryTerm>,
+              {' '}<GlossaryTerm id="bilateral-denoise">denoising</GlossaryTerm>, re-encoding, rescaling, or paraphrasing.
+              Use the labs to feel that fragility first-hand,
               then read why <strong className="text-white/80">cryptographically signed provenance</strong> is the
               durable layer underneath.
             </p>
@@ -249,8 +254,9 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.18 }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-6"
+                className="space-y-8"
               >
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
                 {/* Topic navigation */}
                 <div id="topics-nav" className="md:col-span-4 flex flex-col gap-3">
@@ -331,7 +337,9 @@ export default function App() {
                     );
                   })()}
                 </div>
+                </div>
 
+                <Glossary />
               </motion.div>
             )}
           </AnimatePresence>
