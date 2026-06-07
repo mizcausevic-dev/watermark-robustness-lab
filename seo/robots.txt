@@ -1,0 +1,23 @@
+# provenance-lab.kineticgain.com — Watermark Stress Test
+# Educational AI-provenance lab + white paper. Crawling welcome.
+
+User-agent: *
+Allow: /
+
+# Major answer/generative engines — explicitly welcomed
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://provenance-lab.kineticgain.com/sitemap.xml
